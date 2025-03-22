@@ -1,16 +1,23 @@
-# Run Instructions
-```
-npm install
+# CCTV Front End
 
-vite
-```
+This repository contains the client-side front end for the Cloud Chaser Television (CCTV) web application.
 
-# Building the App
+## Run Instructions
+```npm install```
 
-```npm run build``` to build the app
+```vite```
+
+## Building the App
+
+```vite build``` to build the app
 
 ```vite preview``` to run a local static web server using ```dist/```
 
-# Deploying the app
+## Deploying the app
 
-Upload contents of dist/ folder to cctv-front-end s3 bucket
+Upload contents of dist/ folder to the right s3 bucket.
+
+## Contributing Standards
+
+This project is organized according to https://github.com/alan2207/bulletproof-react/blob/master/README.md.
+When contributing, please adhere to the standards it sets.
