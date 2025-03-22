@@ -1,4 +1,4 @@
-import '../assets/css/videoCard.css';
+import '@/assets/css/videoCard.css';
 import {Card, Image, Flex, Text} from '@aws-amplify/ui-react';
 
 interface VideoCardProps {

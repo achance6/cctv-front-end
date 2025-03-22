@@ -1,6 +1,6 @@
 import "@aws-amplify/ui-react/styles.css";
-import '../../assets/css/uploadPage.css';
-import NavBar from '../../components/navBar';
+import '@/assets/css/uploadPage.css';
+import NavBar from '@/components/navBar';
 import {FileUploader} from '@aws-amplify/ui-react-storage';
 import {Button, Flex,} from '@aws-amplify/ui-react';
 import {Input, Label} from '@aws-amplify/ui-react';

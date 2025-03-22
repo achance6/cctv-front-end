@@ -1,8 +1,8 @@
-import NavBar from '../../components/navBar';
-import VideoCard from "../../components/videoCard";
+import NavBar from '@/components/navBar';
+import VideoCard from "@/components/videoCard";
 import {Collection} from "@aws-amplify/ui-react";
-import '../../assets/css/homePage.css';
-import sampleVideos from '../../assets/sampleVideos';
+import '@/assets/css/homePage.css';
+import sampleVideos from '@/assets/sampleVideos';
 
 
 function HomePage() {

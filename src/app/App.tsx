@@ -1,4 +1,4 @@
-import '../assets/css/App.css';
+import '@/assets/css/App.css';
 
 import {createBrowserRouter, RouterProvider} from 'react-router';
 import HomePage from "./routes/homePage.tsx";
