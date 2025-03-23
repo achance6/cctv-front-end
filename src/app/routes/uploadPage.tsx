@@ -2,9 +2,7 @@ import "@aws-amplify/ui-react/styles.css";
 import '@/assets/css/uploadPage.css';
 import NavBar from '@/components/navBar';
 import {FileUploader} from '@aws-amplify/ui-react-storage';
-import {Button, Flex,} from '@aws-amplify/ui-react';
-import {Input, Label} from '@aws-amplify/ui-react';
-import {TextAreaField} from '@aws-amplify/ui-react';
+import {Button, Flex, Input, Label, TextAreaField} from '@aws-amplify/ui-react';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
 
@@ -22,7 +20,6 @@ function UploadPage() {
 
     const uploadVideo = () => {
 
-
         if (videoTitle === "" || videoDescription === "" || videoTags === "") {
             alert("Please fill in all fields");
         } else {
@@ -31,17 +28,14 @@ function UploadPage() {
             console.log('Description:', videoDescription);
             console.log('Tags:', videoTags);
         }
-
     }
 
     return (
         <div>
-
             <NavBar/>
             <h1>Upload Page</h1>
             <p>Upload your video here</p>
             <Flex as="form" direction="row" width="50rem" className="container">
-
 
                 <Flex direction="column" gap="small" width="25rem" className="div">
                     <Flex direction="row" gap="small" className="div">
@@ -67,7 +61,6 @@ function UploadPage() {
                                 setVideoDescription(e.target.value)
                             }}
                         />
-
                     </Flex>
 
                     <Flex direction="row" gap="small" className="div">
@@ -91,9 +84,7 @@ function UploadPage() {
                         isResumable
                     />
                 </Flex>
-
             </Flex>
-
 
             <Flex direction="row" gap="large" width="20rem" className="container">
                 <Button type="button"
@@ -105,10 +96,8 @@ function UploadPage() {
                         className="btn cancel">Cancel
                 </Button>
             </Flex>
-
         </div>
     );
 }
-
 
 export default UploadPage;
