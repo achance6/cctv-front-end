@@ -8,6 +8,7 @@ import {Authenticator} from "@aws-amplify/ui-react";
 import {AuthProvider} from "react-oidc-context";
 import {Amplify} from "aws-amplify";
 import { AuthUser } from 'aws-amplify/auth';
+import PlaybackPage from "@/app/routes/playbackPage.tsx";
 
 const cognitoAuthConfig = {
     authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ow9MYBmi1",
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
     {
         path: '/upload',
         element: <UploadPage/>
+    },
+    {
+        path: '/playback',
+        element: <PlaybackPage/>
     }
 ]);
 
