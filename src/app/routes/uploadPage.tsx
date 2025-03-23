@@ -1,10 +1,10 @@
 import "@aws-amplify/ui-react/styles.css";
 import '@/assets/css/uploadPage.css';
 import NavBar from '@/components/navBar';
-import {FileUploader} from '@aws-amplify/ui-react-storage';
 import {Button, Flex, Input, Label, TextAreaField} from '@aws-amplify/ui-react';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
+import {uploadData} from "aws-amplify/storage/s3";
 
 
 function UploadPage() {
@@ -12,6 +12,7 @@ function UploadPage() {
     const [videoTitle, setVideoTitle] = useState('');
     const [videoDescription, setVideoDescription] = useState('');
     const [videoTags, setVideoTags] = useState('');
+    const [file, setFile] = useState<File | null>();
     const navigate = useNavigate();
 
     const handleCancel = async () => {
@@ -19,7 +20,9 @@ function UploadPage() {
     }
 
     const uploadVideo = () => {
-
+        if (!file) {
+            return;
+        }
         if (videoTitle === "" || videoDescription === "" || videoTags === "") {
             alert("Please fill in all fields");
         } else {
@@ -28,6 +31,17 @@ function UploadPage() {
             console.log('Description:', videoDescription);
             console.log('Tags:', videoTags);
         }
+
+        uploadData({
+            path: ({identityId}) => `${identityId?.toString() ?? ""}/${file.name}`,
+            data: file,
+            options: {
+                bucket: {
+                    bucketName: "cctv-video-storage",
+                    region: "us-east-1"
+                }
+            }
+        })
     }
 
     return (
@@ -77,12 +91,11 @@ function UploadPage() {
                 </Flex>
 
                 <Flex direction="column" gap="small" width="25rem" className="div">
-                    <FileUploader
-                        acceptedFileTypes={['video/*']}
-                        path="public/"
-                        maxFileCount={1}
-                        isResumable
-                    />
+                    <input
+                        type={"file"}
+                        onChange={(e) => {
+                            setFile(e.target.files?.[0])
+                        }}/>
                 </Flex>
             </Flex>
 
