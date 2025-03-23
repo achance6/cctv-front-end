@@ -6,10 +6,6 @@ import sampleVideos from '@/assets/sampleVideos';
 
 
 function HomePage() {
-
-    const videos = sampleVideos;
-
-
     return (
         <div>
             <NavBar/>
@@ -22,7 +18,7 @@ function HomePage() {
                     direction="row"
                     gap="30px"
                     wrap="wrap"
-                    items={videos}
+                    items={sampleVideos}
                     isPaginated={true}
                     itemsPerPage={9}
                 >

@@ -43,6 +43,7 @@ function NavBar() {
                 onSubmit={search}
             />
             <button
+                type="button"
                 className="uploadButton"
                 onClick={handleUploadClick}>+ Upload
             </button>
