@@ -7,6 +7,7 @@ import UploadPage from "./routes/uploadPage.tsx";
 import {Authenticator} from "@aws-amplify/ui-react";
 import {AuthProvider} from "react-oidc-context";
 import {Amplify} from "aws-amplify";
+import { AuthUser } from 'aws-amplify/auth';
 
 const cognitoAuthConfig = {
     authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ow9MYBmi1",
@@ -50,15 +51,24 @@ const router = createBrowserRouter([
     }
 ]);
 
+function storeUserData(user?: AuthUser) {
+    if (user?.signInDetails?.loginId) {
+        localStorage.setItem("userLoginId", user.signInDetails.loginId)
+    }
+}
+
 function App() {
     return (
         <Authenticator>
-            {({signOut}) => (
-                <div className="App">
-                    <RouterProvider router={router}/>
-                    <button type={"button"} onClick={signOut}>Sign out</button>
-                </div>
-            )}
+            {({signOut, user}) => {
+                storeUserData(user);
+                return (
+                    <div className="App">
+                        <RouterProvider router={router}/>
+                        <button type={"button"} onClick={signOut}>Sign out</button>
+                    </div>
+                )
+            }}
         </Authenticator>
     );
 }
