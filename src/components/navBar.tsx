@@ -11,7 +11,6 @@ function NavBar() {
 
     const search = () => {
         console.log("Searching for ", searchValue);
-
     }
     const handleUploadClick = async () => {
         await navigate('/upload');
@@ -47,18 +46,12 @@ function NavBar() {
                 + Upload
             </button>
 
-
             <div>
                 Hello {localStorage.getItem("userLoginId") ?? "user npt found"}
             </div>
             <Avatar
                 src={circle}
             />
-            {/*
-            <img src={circle} alt='profilePic' className='profilePic' />
-             */}
-
-
         </div>
     );
 }
