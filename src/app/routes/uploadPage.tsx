@@ -93,6 +93,7 @@ function UploadPage() {
                 <Flex direction="column" gap="small" width="25rem" className="div">
                     <input
                         type={"file"}
+                        accept={"video/*"}
                         onChange={(e) => {
                             setFile(e.target.files?.[0])
                         }}/>
