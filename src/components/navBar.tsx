@@ -45,7 +45,8 @@ function NavBar() {
             <button
                 type="button"
                 className="uploadButton"
-                onClick={handleUploadClick}>+ Upload
+                onClick={handleUploadClick}>
+                + Upload
             </button>
 
 
