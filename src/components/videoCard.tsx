@@ -10,7 +10,6 @@ interface VideoCardProps {
 }
 
 function VideoCard(props: VideoCardProps) {
-
     return (
         <Card className="videoCard" variation='outlined' maxWidth="350px" maxHeight="250px">
             <Image
