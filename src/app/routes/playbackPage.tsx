@@ -1,5 +1,4 @@
-import {useState, useEffect} from 'react';
-import 'tachyons/css/tachyons.min.css';
+import {useEffect, useState} from 'react';
 import '@/assets/css/playbackPage.css';
 import {Video} from "@/assets/sampleVideos.ts";
 

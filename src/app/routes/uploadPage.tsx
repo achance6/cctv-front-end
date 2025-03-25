@@ -6,9 +6,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import {uploadData} from "aws-amplify/storage/s3";
 
-
 function UploadPage() {
-
     const [videoTitle, setVideoTitle] = useState('');
     const [videoDescription, setVideoDescription] = useState('');
     const [videoTags, setVideoTags] = useState('');
@@ -45,26 +43,26 @@ function UploadPage() {
     }
 
     return (
-        <div>
+        <div className="min-h-screen bg-gray-100">
             <NavBar/>
-            <h1>Upload Page</h1>
-            <p>Upload your video here</p>
-            <Flex as="form" direction="row" width="50rem" className="container">
-
-                <Flex direction="column" gap="small" width="25rem" className="div">
-                    <Flex direction="row" gap="small" className="div">
-                        <Label htmlFor="Title">Title:</Label>
+            <h1 className="text-4xl font-bold text-center my-8">Upload Page</h1>
+            <p className="text-center mb-8">Upload your video here</p>
+            <Flex as="form" direction="row" className="container mx-auto px-4" width="full" gap="8">
+                <Flex direction="column" gap="4" className="w-full md:w-1/2">
+                    <Flex direction="row" gap="4" className="items-center">
+                        <Label htmlFor="videoTitle" className="w-1/4">Title:</Label>
                         <Input
                             id="videoTitle"
                             type="text"
                             value={videoTitle}
                             onChange={(e) => {
                                 setVideoTitle(e.target.value)
-                            }}/>
+                            }}
+                            className="w-3/4"
+                        />
                     </Flex>
-
-                    <Flex direction="row" gap="small" className="div">
-                        <Label htmlFor="Description">Description:</Label>
+                    <Flex direction="row" gap="4" className="items-center">
+                        <Label htmlFor="videoDescription" className="w-1/4">Description:</Label>
                         <TextAreaField
                             label="Description"
                             name="last_name"
@@ -74,41 +72,38 @@ function UploadPage() {
                             onChange={(e) => {
                                 setVideoDescription(e.target.value)
                             }}
+                            className="w-3/4"
                         />
                     </Flex>
-
-                    <Flex direction="row" gap="small" className="div">
-                        <Label htmlFor="Tags">Tags:</Label>
+                    <Flex direction="row" gap="4" className="items-center">
+                        <Label htmlFor="videoTags" className="w-1/4">Tags:</Label>
                         <Input
                             id="videoTags"
                             type="text"
                             value={videoTags}
                             onChange={(e) => {
                                 setVideoTags(e.target.value)
-                            }}/>
+                            }}
+                            className="w-3/4"
+                        />
                     </Flex>
-
                 </Flex>
-
-                <Flex direction="column" gap="small" width="25rem" className="div">
+                <Flex direction="column" gap="4" className="w-full md:w-1/2">
                     <input
-                        type={"file"}
-                        accept={"video/*"}
+                        type="file"
+                        accept="video/*"
                         onChange={(e) => {
                             setFile(e.target.files?.[0])
-                        }}/>
+                        }}
+                        className="w-full"
+                    />
                 </Flex>
             </Flex>
-
-            <Flex direction="row" gap="large" width="20rem" className="container">
-                <Button type="button"
-                        onClick={uploadVideo}
-                        className="btn upload">Upload
-                </Button>
-                <Button type="button"
-                        onClick={handleCancel}
-                        className="btn cancel">Cancel
-                </Button>
+            <Flex direction="row" gap="8" className="container mx-auto px-4 mt-8">
+                <Button type="button" onClick={uploadVideo}
+                        className="btn upload bg-blue-500 text-white px-4 py-2 rounded">Upload</Button>
+                <Button type="button" onClick={handleCancel}
+                        className="btn cancel bg-red-500 text-white px-4 py-2 rounded">Cancel</Button>
             </Flex>
         </div>
     );
