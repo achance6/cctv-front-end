@@ -7,20 +7,11 @@
 }
 
 .logo {
-    position: static;
-    width: 5em;
-    height: 5em;
+    position: relative;
+    width: 7em;
+    height: 7em;
     margin-left: 20px;
     cursor: pointer;
-}
-
-.searchField {
-    width: 50%;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid #007bff;
-    padding: 5px;
-    margin-left: 20px;
 }
 
 .profilePic {
@@ -31,13 +22,20 @@
 
 }
 
-.uploadButton {
+.Button {
     padding: 8px;
-    background-color: #007bff;
     color: white;
     font-size: large;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.Upload{
+    background-color: #754c97;
+}
+.Upload:hover{
+    background-color: #5e3b7f;
+}
+
 

@@ -18,6 +18,10 @@ function NavBar() {
     const handleHomepageClick = async () => {
         await navigate('/');
     }
+    const handleAvatarClick = async () => {
+        await navigate('/profile');
+    }
+ 
 
     return (
         <div className="navBar">
@@ -26,14 +30,15 @@ function NavBar() {
                 src={logo}
                 alt='logo'
                 className="logo"
-
                 onClick={handleHomepageClick}
             />
 
             <SearchField
                 label="Search"
                 placeholder="Search here..."
-                className="searchField"
+                className="search"
+        
+                width="600px"
                 onChange={(e) => {
                     setSearchValue(e.target.value)
                 }}
@@ -41,16 +46,22 @@ function NavBar() {
             />
             <button
                 type="button"
-                className="uploadButton"
+                className="Upload Button"
                 onClick={handleUploadClick}>
                 + Upload
             </button>
-
+            {/*}
             <div>
                 Hello {localStorage.getItem("userLoginId") ?? "user npt found"}
             </div>
+            */}
             <Avatar
                 src={circle}
+                className="avatar"
+                marginRight="20px"
+                width="45px"
+                height="40px"
+                onClick={handleAvatarClick}
             />
         </div>
     );
