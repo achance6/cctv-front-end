@@ -1,15 +1,14 @@
 import '@/assets/css/App.css';
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
-import {createBrowserRouter, RouterProvider} from 'react-router';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import HomePage from "./routes/homePage.tsx";
 import UploadPage from "./routes/uploadPage.tsx";
-import {Authenticator} from "@aws-amplify/ui-react";
+import {Authenticator, Flex} from "@aws-amplify/ui-react";
 import {AuthProvider} from "react-oidc-context";
 import {Amplify} from "aws-amplify";
-import { AuthUser } from 'aws-amplify/auth';
+import {AuthUser} from 'aws-amplify/auth';
 import PlaybackPage from "@/app/routes/playbackPage.tsx";
-import { Flex } from '@aws-amplify/ui-react';
 import Profile from "@/app/routes/profile.tsx";
 
 
@@ -44,25 +43,6 @@ Amplify.configure({
     },
 });
 
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <HomePage/>
-    },
-    {
-        path: '/upload',
-        element: <UploadPage/>
-    },
-    {
-        path: '/playback',
-        element: <PlaybackPage/>
-    },
-    {
-        path: '/profile',
-        element: <Profile/>
-    }
-]);
-
 function storeUserData(user?: AuthUser) {
     if (user?.signInDetails?.loginId) {
         localStorage.setItem("userLoginId", user.signInDetails.loginId)
@@ -78,7 +58,6 @@ function App() {
                 return (
                     <div className="App">
                         <Flex direction={"row"} gap={4} padding={4}>
-                            <RouterProvider router={router}/>
                             <button type={"button"}
                                      onClick={signOut}
                                      className='sign-out-button'
@@ -96,11 +75,19 @@ function App() {
 // @ts-expect-error/Won't be null
 const root = createRoot(document.getElementById("root"));
 
-// wrap the application with AuthProvider
+// wrap the application with AuthProvider and React Router
 root.render(
     <StrictMode>
         <AuthProvider {...cognitoAuthConfig}>
-            <App/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/upload" element={<UploadPage/>}/>
+                    <Route path="/playback" element={<PlaybackPage/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                </Routes>
+                <App/>
+            </BrowserRouter>
         </AuthProvider>
     </StrictMode>
 );
