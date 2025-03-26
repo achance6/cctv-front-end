@@ -4,12 +4,11 @@ import {createRoot} from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router';
 import HomePage from "./routes/homePage.tsx";
 import UploadPage from "./routes/uploadPage.tsx";
-import {Authenticator} from "@aws-amplify/ui-react";
+import {Authenticator, Button, Flex, View} from "@aws-amplify/ui-react";
 import {AuthProvider} from "react-oidc-context";
 import {Amplify} from "aws-amplify";
-import { AuthUser } from 'aws-amplify/auth';
+import {AuthUser} from 'aws-amplify/auth';
 import PlaybackPage from "@/app/routes/playbackPage.tsx";
-import { Flex } from '@aws-amplify/ui-react';
 import Profile from "@/app/routes/profile.tsx";
 
 
@@ -76,18 +75,15 @@ function App() {
             {({signOut, user}) => {
                 storeUserData(user);
                 return (
-                    <div className="App">
+                    <View className="App">
                         <Flex direction={"row"} gap={4} padding={4}>
                             <RouterProvider router={router}/>
-                            <button type={"button"}
-                                     onClick={signOut}
-                                     className='sign-out-button'
-                                     
-                            >Sign out</button>
                         </Flex>
-                        
-
-                    </div>
+                        <Button type={"button"}
+                                onClick={signOut}
+                                className='sign-out-button'
+                        >Sign out</Button>
+                    </View>
                 )
             }}
         </Authenticator>
