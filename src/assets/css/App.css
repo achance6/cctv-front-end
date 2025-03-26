@@ -84,7 +84,7 @@
     }
 }
 
-.sign-out-button{
+.sign-out-button {
     padding: 8px;
     color: white;
     font-size: large;
@@ -96,6 +96,7 @@
     height: 50px;
     margin-top: 30px;
 }
-.sign-out-button:hover{
+
+.sign-out-button:hover {
     background-color: rgba(22, 19, 19, 0.637);
 }

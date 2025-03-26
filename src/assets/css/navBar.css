@@ -31,10 +31,11 @@
     cursor: pointer;
 }
 
-.Upload{
+.Upload {
     background-color: #754c97;
 }
-.Upload:hover{
+
+.Upload:hover {
     background-color: #5e3b7f;
 }
 
