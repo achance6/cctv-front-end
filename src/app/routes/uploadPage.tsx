@@ -1,7 +1,7 @@
 import "@aws-amplify/ui-react/styles.css";
 import '@/assets/css/uploadPage.css';
 import NavBar from '@/components/navBar';
-import {Button, Flex, Input, Label, TextAreaField} from '@aws-amplify/ui-react';
+import {Button, Flex, Input, Label, TextAreaField, Message} from '@aws-amplify/ui-react';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import {uploadData} from "aws-amplify/storage/s3";
@@ -11,18 +11,22 @@ function UploadPage() {
     const [videoDescription, setVideoDescription] = useState('');
     const [videoTags, setVideoTags] = useState('');
     const [file, setFile] = useState<File | null>();
+    const [uploadStatus, setUploadStatus] = useState<"idle" | "success" | "error">("idle");
     const navigate = useNavigate();
 
     const handleCancel = async () => {
         await navigate('/');
     }
 
+
     const uploadVideo = () => {
         if (!file) {
+            alert('Please upload a video');
             return;
         }
         if (videoTitle === "" || videoDescription === "" || videoTags === "") {
             alert("Please fill in all fields");
+            return;
         } else {
             console.log("Uploading...");
             console.log('Title:', videoTitle);
@@ -30,16 +34,25 @@ function UploadPage() {
             console.log('Tags:', videoTags);
         }
 
-        uploadData({
-            path: ({identityId}) => `${identityId?.toString() ?? ""}/${file.name}`,
-            data: file,
-            options: {
-                bucket: {
-                    bucketName: "cctv-video-storage",
-                    region: "us-east-1"
+        try {
+            uploadData({
+                path: ({identityId}) => `${identityId?.toString() ?? ""}/${file.name}`,
+                data: file,
+                options: {
+                    bucket: {
+                        bucketName: "cctv-video-storage",
+                        region: "us-east-1"
+                    }
                 }
-            }
-        })
+            });
+            setUploadStatus("success");
+        }catch(err) {
+            console.log("Upload failed:", err);
+            setUploadStatus("error");
+        }
+
+
+
     }
 
     return (
@@ -87,6 +100,8 @@ function UploadPage() {
                             className="w-3/4"
                         />
                     </Flex>
+
+
                 </Flex>
                 <Flex direction="column" gap="4" className="w-full md:w-1/2">
                     <input
@@ -97,7 +112,12 @@ function UploadPage() {
                         }}
                         className="w-full"
                     />
+                    {/*File upload status*/}
+                    {uploadStatus === "success" && <Message colorTheme="success">File uploaded successfully!</Message> }
+                    {uploadStatus === "error" && <Message colorTheme="error">File upload failed!</Message> }
+
                 </Flex>
+
             </Flex>
             <Flex direction="row" gap="8" className="container mx-auto px-4 mt-8">
                 <Button type="button" onClick={uploadVideo}

@@ -36,9 +36,6 @@
     padding-left: 30px;
 }
 
-.videoSecondInfo {
-    display: flex;
-    flex-direction: row;
-    padding-top: 0;
-    padding-left: 40px;
+.videoChannelName{
+    font-weight: bold;
 }

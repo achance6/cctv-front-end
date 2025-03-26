@@ -9,6 +9,9 @@ import {AuthProvider} from "react-oidc-context";
 import {Amplify} from "aws-amplify";
 import { AuthUser } from 'aws-amplify/auth';
 import PlaybackPage from "@/app/routes/playbackPage.tsx";
+import { Flex } from '@aws-amplify/ui-react';
+import Profile from "@/app/routes/profile.tsx";
+
 
 const cognitoAuthConfig = {
     authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ow9MYBmi1",
@@ -53,6 +56,10 @@ const router = createBrowserRouter([
     {
         path: '/playback',
         element: <PlaybackPage/>
+    },
+    {
+        path: '/profile',
+        element: <Profile/>
     }
 ]);
 
@@ -64,13 +71,21 @@ function storeUserData(user?: AuthUser) {
 
 function App() {
     return (
+        
         <Authenticator>
             {({signOut, user}) => {
                 storeUserData(user);
                 return (
                     <div className="App">
-                        <RouterProvider router={router}/>
-                        <button type={"button"} onClick={signOut}>Sign out</button>
+                        <Flex direction={"row"} gap={4} padding={4}>
+                            <RouterProvider router={router}/>
+                            <button type={"button"}
+                                     onClick={signOut}
+                                     className='sign-out-button'
+                            >Sign out</button>
+                        </Flex>
+                        
+
                     </div>
                 )
             }}

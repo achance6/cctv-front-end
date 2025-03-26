@@ -19,7 +19,7 @@ function HomePage() {
                     wrap="wrap"
                     items={sampleVideos}
                     isPaginated={true}
-                    itemsPerPage={9}
+                    itemsPerPage={6}
                 >
                     {(item, index) => (
                         <VideoCard
