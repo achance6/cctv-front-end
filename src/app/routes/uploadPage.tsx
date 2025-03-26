@@ -6,6 +6,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import {uploadData} from "aws-amplify/storage/s3";
 
+
 function UploadPage() {
     const [videoTitle, setVideoTitle] = useState('');
     const [videoDescription, setVideoDescription] = useState('');
@@ -24,6 +25,7 @@ function UploadPage() {
             alert('Please upload a video');
             return;
         }
+        
         if (videoTitle === "" || videoDescription === "" || videoTags === "") {
             alert("Please fill in all fields");
             return;
@@ -68,6 +70,7 @@ function UploadPage() {
                             id="videoTitle"
                             type="text"
                             value={videoTitle}
+
                             onChange={(e) => {
                                 setVideoTitle(e.target.value)
                             }}
@@ -77,7 +80,7 @@ function UploadPage() {
                     <Flex direction="row" gap="4" className="items-center">
                         <Label htmlFor="videoDescription" className="w-1/4">Description:</Label>
                         <TextAreaField
-                            label="Description"
+                            id="videoDescription"
                             name="last_name"
                             placeholder="Tell us about your video"
                             rows={3}
@@ -86,6 +89,7 @@ function UploadPage() {
                                 setVideoDescription(e.target.value)
                             }}
                             className="w-3/4"
+                            label="" //Blank label to remove default label
                         />
                     </Flex>
                     <Flex direction="row" gap="4" className="items-center">
@@ -110,11 +114,12 @@ function UploadPage() {
                         onChange={(e) => {
                             setFile(e.target.files?.[0])
                         }}
-                        className="w-full"
+                        
+                        className="w-full border border-gray-300 rounded p-2"
                     />
                     {/*File upload status*/}
-                    {uploadStatus === "success" && <Message colorTheme="success">File uploaded successfully!</Message> }
-                    {uploadStatus === "error" && <Message colorTheme="error">File upload failed!</Message> }
+                    {uploadStatus === "success" && <Message colorTheme="success">Video uploaded successfully!</Message> }
+                    {uploadStatus === "error" && <Message colorTheme="error">Video upload failed!</Message> }
 
                 </Flex>
 

@@ -82,6 +82,7 @@ function App() {
                             <button type={"button"}
                                      onClick={signOut}
                                      className='sign-out-button'
+                                     
                             >Sign out</button>
                         </Flex>
                         
