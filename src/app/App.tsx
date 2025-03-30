@@ -1,10 +1,10 @@
 import "@/assets/css/App.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "./routes/homePage.tsx";
 import UploadPage from "./routes/uploadPage.tsx";
-import { Authenticator, Button, Flex, View } from "@aws-amplify/ui-react";
+import { Authenticator, View } from "@aws-amplify/ui-react";
 import { AuthProvider } from "react-oidc-context";
 import { Amplify } from "aws-amplify";
 import { AuthUser } from "aws-amplify/auth";
@@ -42,25 +42,6 @@ Amplify.configure({
   },
 });
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/upload",
-    element: <UploadPage />,
-  },
-  {
-    path: "/playback",
-    element: <PlaybackPage />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-]);
-
 function storeUserData(user?: AuthUser) {
   if (user?.signInDetails?.loginId) {
     localStorage.setItem("userLoginId", user.signInDetails.loginId);
@@ -74,16 +55,17 @@ function App() {
         storeUserData(user);
         return (
           <View className="App">
-            <Flex direction={"row"} gap={4} padding={4}>
-              <RouterProvider router={router} />
-            </Flex>
-            <Button
-              type={"button"}
-              onClick={signOut}
-              className="sign-out-button"
-            >
-              Sign out
-            </Button>
+            <BrowserRouter>
+              <Routes>
+                <Route index element={<HomePage />} />
+                <Route path={"/upload"} element={<UploadPage />} />
+                <Route path={"/playback"} element={<PlaybackPage />} />
+                <Route
+                  path={"/profile"}
+                  element={<Profile signOut={signOut} />}
+                />
+              </Routes>
+            </BrowserRouter>
           </View>
         );
       }}
@@ -91,11 +73,11 @@ function App() {
   );
 }
 
-// @ts-expect-error/Won't be null
-const root = createRoot(document.getElementById("root"));
+const root = document.getElementById("root");
 
 // wrap the application with AuthProvider
-root.render(
+// @ts-expect-error/Won't be null
+createRoot(root).render(
   <StrictMode>
     <AuthProvider {...cognitoAuthConfig}>
       <App />
