@@ -1,12 +1,13 @@
 import NavBar from "@/components/navBar";
+import { Heading, View } from "@aws-amplify/ui-react";
 
 function Profile() {
   return (
-    <div>
+    <View className={"min-h-screen bg-gray-200"}>
       <NavBar />
 
-      <h1>Profile</h1>
-    </div>
+      <Heading level={1}>Profile</Heading>
+    </View>
   );
 }
 
