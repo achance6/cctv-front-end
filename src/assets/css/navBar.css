@@ -1,42 +1,13 @@
-.navBar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Distribute items evenly */
-    width: 100%;
-    box-sizing: border-box;
-}
-
 .logo {
-    position: relative;
-    width: 7em;
-    height: 7em;
-    margin-left: 20px;
+    transition: filter 300ms;
+}
+
+.logo:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.avatar:hover {
     cursor: pointer;
 }
-
-.profilePic {
-    width: 70px;
-    height: 55px;
-    margin-left: 150px;
-    padding-right: 20px;
-
-}
-
-.Button {
-    padding: 8px;
-    color: white;
-    font-size: large;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.Upload {
-    background-color: #754c97;
-}
-
-.Upload:hover {
-    background-color: #5e3b7f;
-}
-
 
