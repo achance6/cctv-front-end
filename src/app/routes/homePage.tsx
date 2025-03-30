@@ -6,7 +6,7 @@ import sampleVideos from "@/assets/sampleVideos";
 
 function HomePage() {
   return (
-    <View className="min-h-screen bg-gray-100">
+    <View className="min-h-screen bg-gray-200">
       <NavBar />
 
       <Heading level={6} className="text-4xl font-bold text-center my-8">
