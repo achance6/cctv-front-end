@@ -53,6 +53,7 @@ function App() {
     <Authenticator>
       {({ signOut, user }) => {
         storeUserData(user);
+
         return (
           <View className="App">
             <BrowserRouter>
@@ -62,6 +63,7 @@ function App() {
                 <Route path={"/playback"} element={<PlaybackPage />} />
                 <Route
                   path={"/profile"}
+                  // @ts-expect-error/Can't get this type to work but this is okay
                   element={<Profile signOut={signOut} />}
                 />
               </Routes>
