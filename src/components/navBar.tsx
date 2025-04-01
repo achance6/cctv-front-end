@@ -7,7 +7,7 @@ import {
   SearchField,
 } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 import defaultAvatar from "@/assets/default.png";
 
 const avatarImages = import.meta.glob('/src/assets/avatars/*.png');
