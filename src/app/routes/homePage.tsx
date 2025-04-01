@@ -11,17 +11,17 @@ function HomePage() {
       <Heading
         level={1}
         textAlign={"center"}
-        className="text-4xl font-bold my-8"
+        className={"text-4xl font-bold my-8"}
       >
         Home Page
       </Heading>
 
       <Card>
         <Collection
-          type="list"
-          direction="row"
-          gap="8"
-          wrap="wrap"
+          type={"list"}
+          direction={"row"}
+          gap={"8"}
+          wrap={"wrap"}
           items={sampleVideos}
           isPaginated={true}
           itemsPerPage={6}
