@@ -3,19 +3,6 @@
     height: 150px;
 }
 
-.videoCard {
-    background-color: white;
-    width: 350px;
-    height: 250px;
-    border: 1px solid #f5f5f5;
-    border-radius: 15px;
-
-}
-
-.videoCard:hover {
-    background-color: #f5f5f5;
-}
-
 .videoTitle {
     font-size: .85em;
     font-weight: bold;
