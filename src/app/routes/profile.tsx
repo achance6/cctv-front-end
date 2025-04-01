@@ -1,8 +1,14 @@
 import NavBar from "@/components/navBar";
-import { Button, Flex, Heading, View } from "@aws-amplify/ui-react";
-import { AuthEventData } from "@aws-amplify/ui";
+import {
+  Button,
+  Flex,
+  Heading,
+  useAuthenticator,
+  View,
+} from "@aws-amplify/ui-react";
 
-function Profile(signOut?: (data?: AuthEventData) => void) {
+function Profile() {
+  const { signOut } = useAuthenticator((context) => [context.user]);
   return (
     <View width={"100%"} className={"bg-gray-200"}>
       <NavBar />
@@ -10,7 +16,7 @@ function Profile(signOut?: (data?: AuthEventData) => void) {
         <Heading level={1} textAlign={"center"}>
           Profile
         </Heading>
-        <Button width={"fit-content"} type={"button"} onClick={signOut}>
+        <Button type={"button"} onClick={signOut} className="sign-out-button">
           Sign out
         </Button>
       </Flex>

@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
   Flex,
   Image,
   SearchField,
+  useAuthenticator,
 } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
 import logo from "@/assets/logo.png";
 import defaultAvatar from "@/assets/default.png";
 
-const avatarImages = import.meta.glob('/src/assets/avatars/*.png');
+const avatarImages = import.meta.glob("/src/assets/avatars/*.png");
 
 function NavBar() {
+  const { user } = useAuthenticator((context) => [context.user]);
   const [searchValue, setSearchValue] = React.useState("");
   const [avatarSrc, setAvatarSrc] = useState<string | null>(null);
-  const user = localStorage.getItem("userLoginId") ?? "user not found";
-  const firstLetter = user.charAt(0).toLowerCase();
-  
+  const firstLetter =
+    user.signInDetails?.loginId?.charAt(0).toLowerCase() ?? "";
+
   useEffect(() => {
     const loadAvatar = async () => {
-        const imageLoader = avatarImages[`/src/assets/avatars/${firstLetter}.png`];
+      const imageLoader =
+        avatarImages[`/src/assets/avatars/${firstLetter}.png`];
 
-        if (imageLoader) {
-            try {
-                const imageModule = (await imageLoader()) as { default: string };
-                setAvatarSrc(imageModule.default); 
-            } catch (error) {
-                console.error("Error loading avatar image:", error);
-                setAvatarSrc(defaultAvatar);
-            }
-        } else {
-            setAvatarSrc(defaultAvatar);
+      if (imageLoader) {
+        try {
+          const imageModule = (await imageLoader()) as { default: string };
+          setAvatarSrc(imageModule.default);
+        } catch (error) {
+          console.error("Error loading avatar image:", error);
+          setAvatarSrc(defaultAvatar);
         }
+      } else {
+        setAvatarSrc(defaultAvatar);
+      }
     };
 
     loadAvatar();
@@ -81,7 +84,7 @@ function NavBar() {
             */}
 
       <Link to={"/profile"} className={"hover:drop-shadow-xl"}>
-        <Avatar src={avatarSrc || defaultAvatar} size={"large"} />
+        <Avatar src={avatarSrc ?? defaultAvatar} size={"large"} />
       </Link>
     </Flex>
   );

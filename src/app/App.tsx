@@ -7,7 +7,6 @@ import UploadPage from "./routes/uploadPage.tsx";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { AuthProvider } from "react-oidc-context";
 import { Amplify } from "aws-amplify";
-import { AuthUser } from "aws-amplify/auth";
 import PlaybackPage from "@/app/routes/playbackPage.tsx";
 import Profile from "@/app/routes/profile.tsx";
 
@@ -42,29 +41,17 @@ Amplify.configure({
   },
 });
 
-function storeUserData(user?: AuthUser) {
-  if (user?.signInDetails?.loginId) {
-    localStorage.setItem("userLoginId", user.signInDetails.loginId);
-  }
-}
-
 export default function App() {
   return (
     <Authenticator>
-      {({ signOut, user }) => {
-        storeUserData(user);
-
+      {() => {
         return (
           <BrowserRouter>
             <Routes>
               <Route index element={<HomePage />} />
               <Route path={"/upload"} element={<UploadPage />} />
               <Route path={"/playback"} element={<PlaybackPage />} />
-              <Route
-                path={"/profile"}
-                // @ts-expect-error/Can't get this type to work but this is okay
-                element={<Profile signOut={signOut} />}
-              />
+              <Route path={"/profile"} element={<Profile />} />
             </Routes>
           </BrowserRouter>
         );
