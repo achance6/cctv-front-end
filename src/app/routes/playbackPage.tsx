@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "@/assets/css/playbackPage.css";
 import { Video } from "@/assets/sampleVideos.ts";
+import NavBar from "@/components/navBar.tsx";
 
 function PlaybackPage() {
   const [videoSrc, setVideoSrc] = useState("beach.mp4");
@@ -28,6 +29,7 @@ function PlaybackPage() {
 
   return (
     <div className="tc">
+      <NavBar />
       <div className="wrapper">
         <div className="video-container">
           <video id="videoPlayer" controls>

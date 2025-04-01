@@ -2,6 +2,7 @@ import NavBar from "@/components/navBar";
 import VideoCard from "@/components/videoCard";
 import { Card, Collection, Heading, View } from "@aws-amplify/ui-react";
 import sampleVideos from "@/assets/sampleVideos";
+import { Link } from "react-router";
 
 function HomePage() {
   return (
@@ -28,14 +29,16 @@ function HomePage() {
           className={"container mx-auto px-4"}
         >
           {(item, index) => (
-            <VideoCard
-              key={index}
-              title={item.title}
-              channelName={item.channelName}
-              views={parseInt(item.views)}
-              time={item.time}
-              thumbnail={item.thumbnail}
-            />
+            <Link to={"/playback"}>
+              <VideoCard
+                key={index}
+                title={item.title}
+                channelName={item.channelName}
+                views={parseInt(item.views)}
+                time={item.time}
+                thumbnail={item.thumbnail}
+              />
+            </Link>
           )}
         </Collection>
       </Card>
