@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "./routes/homePage.tsx";
 import UploadPage from "./routes/uploadPage.tsx";
-import { Authenticator, View } from "@aws-amplify/ui-react";
+import { Authenticator } from "@aws-amplify/ui-react";
 import { AuthProvider } from "react-oidc-context";
 import { Amplify } from "aws-amplify";
 import { AuthUser } from "aws-amplify/auth";
@@ -48,43 +48,37 @@ function storeUserData(user?: AuthUser) {
   }
 }
 
-function App() {
+export default function App() {
   return (
     <Authenticator>
       {({ signOut, user }) => {
         storeUserData(user);
 
         return (
-          <View className="App">
-            <BrowserRouter>
-              <Routes>
-                <Route index element={<HomePage />} />
-                <Route path={"/upload"} element={<UploadPage />} />
-                <Route path={"/playback"} element={<PlaybackPage />} />
-                <Route
-                  path={"/profile"}
-                  // @ts-expect-error/Can't get this type to work but this is okay
-                  element={<Profile signOut={signOut} />}
-                />
-              </Routes>
-            </BrowserRouter>
-          </View>
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<HomePage />} />
+              <Route path={"/upload"} element={<UploadPage />} />
+              <Route path={"/playback"} element={<PlaybackPage />} />
+              <Route
+                path={"/profile"}
+                // @ts-expect-error/Can't get this type to work but this is okay
+                element={<Profile signOut={signOut} />}
+              />
+            </Routes>
+          </BrowserRouter>
         );
       }}
     </Authenticator>
   );
 }
 
-const root = document.getElementById("root");
-
 // wrap the application with AuthProvider
 // @ts-expect-error/Won't be null
-createRoot(root).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider {...cognitoAuthConfig}>
       <App />
     </AuthProvider>
   </StrictMode>,
 );
-
-export default App;

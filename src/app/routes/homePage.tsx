@@ -1,15 +1,18 @@
 import NavBar from "@/components/navBar";
 import VideoCard from "@/components/videoCard";
 import { Card, Collection, Heading, View } from "@aws-amplify/ui-react";
-import "@/assets/css/homePage.css";
 import sampleVideos from "@/assets/sampleVideos";
 
 function HomePage() {
   return (
-    <View className="min-h-screen bg-gray-200">
+    <View width={"100%"} className={"bg-gray-200"}>
       <NavBar />
 
-      <Heading level={6} className="text-4xl font-bold text-center my-8">
+      <Heading
+        level={1}
+        textAlign={"center"}
+        className="text-4xl font-bold my-8"
+      >
         Home Page
       </Heading>
 
@@ -22,7 +25,7 @@ function HomePage() {
           items={sampleVideos}
           isPaginated={true}
           itemsPerPage={6}
-          className="feed container mx-auto px-4"
+          className={"container mx-auto px-4"}
         >
           {(item, index) => (
             <VideoCard
