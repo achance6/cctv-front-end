@@ -1,5 +1,5 @@
 import "@/assets/css/videoCard.css";
-import { Card, Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Card, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 
 interface VideoCardProps {
   thumbnail: string;
@@ -22,7 +22,7 @@ function VideoCard(props: VideoCardProps) {
         src={props.thumbnail}
         alt={props.title}
       />
-      <div>
+      <View>
         <Text
           isTruncated={true}
           className="videoTitle"
@@ -44,7 +44,7 @@ function VideoCard(props: VideoCardProps) {
             {props.views} views : {props.time}
           </Text>
         </Flex>
-      </div>
+      </View>
     </Card>
   );
 }
