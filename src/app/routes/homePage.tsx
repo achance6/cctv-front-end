@@ -29,6 +29,7 @@ function HomePage() {
         >
           {(item, index) => (
             <VideoCard
+
               key={index}
               title={item.title}
               channelName={item.channelName}
