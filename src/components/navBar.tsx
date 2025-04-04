@@ -47,6 +47,7 @@ function NavBar() {
 
   return (
     <Flex
+    
       direction={"row"}
       justifyContent={"space-around"}
       alignItems={"center"}
@@ -55,10 +56,12 @@ function NavBar() {
       gap={"1rem"}
       height={"20vh"}
       paddingTop={"1rem"}
+      paddingBottom={"1rem"}
       className={"shrink-0"}
     >
       <Link to={"/"} className={"w-14 hover:drop-shadow-xl"}>
-        <Image alt={"logo"} src={logo} />
+        <Image alt={"logo"} src={logo}
+          height="100px" width="100px"/>
       </Link>
 
       <SearchField
@@ -72,7 +75,8 @@ function NavBar() {
         onSubmit={search}
       />
       <Link to={"/upload"}>
-        <Button type={"button"} className={"Upload Button"}>
+        <Button type={"button"} className={"Upload Button"}
+        variation="primary" colorTheme="info">
           + Upload
         </Button>
       </Link>
