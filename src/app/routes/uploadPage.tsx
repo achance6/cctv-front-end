@@ -11,10 +11,11 @@ import {
   TextAreaField,
   TextField,
   View,
+  useAuthenticator,
 } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { uploadData } from "aws-amplify/storage/s3";
+
 
 function UploadPage() {
   const [videoTitle, setVideoTitle] = useState("");
@@ -25,12 +26,16 @@ function UploadPage() {
     "idle" | "success" | "error"
   >("idle");
   const navigate = useNavigate();
+  const { user } = useAuthenticator((context) => [context.user]);
+  const userDetails = user.signInDetails?.loginId;
+  const userName = userDetails?.substring(0, userDetails.lastIndexOf("@"));
+
 
   const handleCancel = async () => {
     await navigate("/");
   };
 
-  const uploadVideo = () => {
+  const uploadVideo = async () => {
     if (!file) {
       alert("Please upload a video");
       return;
@@ -47,17 +52,24 @@ function UploadPage() {
     }
 
     try {
-      uploadData({
-        path: ({ identityId }) =>
-          `${identityId?.toString() ?? ""}/${file.name}`,
-        data: file,
-        options: {
-          bucket: {
-            bucketName: "cctv-video-storage",
-            region: "us-east-1",
-          },
+       const response = await fetch("https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+            uuid:"123e4567-e89b-12d3-a456-426614174000",
+            title: videoTitle,
+            description: videoDescription,
+            tags: videoTags,
+            creationDate : new Date().toISOString(),
+            uploader: userName,
+        }),
       });
+      if(!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       setUploadStatus("success");
     } catch (err) {
       console.log("Upload failed:", err);
