@@ -1,35 +1,39 @@
 body {
     background: linear-gradient(to right, #76c7c0, #1e3c72);
     display: flex;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    height: 100vh; /* Full viewport height */
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
     margin: 0; 
 }
 
 .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically inside the wrapper */
-    align-items: center; /* Center content horizontally inside the wrapper */
+    justify-content: center; 
+    align-items: center; 
     gap: 10px;
-    width: 80%;
-    max-width: 900px;
-    height: 100%; /* Take full height of the body */
+    width: 90%;
+    max-width: 1200px;
+    height: 100%; 
+    padding-bottom: 150px; 
 }
 
 .video-container {
     width: 100%;
+    max-width: 1400px;
     background: #222;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
 }
 
 video {
-    width: 100%; /* Ensures the video takes the full width of its container */
-    max-width: 100%; /* Revert to original maximum width */
-    height: auto; /* Maintains the aspect ratio */
+    width: 100%;
+    max-width: 100%;
+    height: auto; 
     border-radius: 8px;
     display: block;
 }
@@ -83,3 +87,5 @@ video {
     margin-top: 10px;
     font-size: 16px;
 }
+
+
