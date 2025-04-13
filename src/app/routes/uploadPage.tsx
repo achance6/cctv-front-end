@@ -10,12 +10,13 @@ import {
   Text,
   TextAreaField,
   TextField,
-  View,
   useAuthenticator,
+  View,
 } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-
+import { uploadData } from "aws-amplify/storage/s3";
+import { v4 as uuidv4 } from "uuid";
 
 function UploadPage() {
   const [videoTitle, setVideoTitle] = useState("");
@@ -29,7 +30,6 @@ function UploadPage() {
   const { user } = useAuthenticator((context) => [context.user]);
   const userDetails = user.signInDetails?.loginId;
   const userName = userDetails?.substring(0, userDetails.lastIndexOf("@"));
-
 
   const handleCancel = async () => {
     await navigate("/");
@@ -48,25 +48,45 @@ function UploadPage() {
       console.log("Uploading...");
       console.log("Title:", videoTitle);
       console.log("Description:", videoDescription);
-      console.log("Tags:", videoTags);
+      console.log("Tags:", videoTags.split(","));
     }
 
     try {
-       const response = await fetch("https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video",{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
+      const uuid = uuidv4();
+
+      // Upload to S3
+      uploadData({
+        path: ({ identityId }) => `${identityId?.toString() ?? ""}/${uuid}`,
+        data: file,
+        options: {
+          bucket: {
+            bucketName: "cctv-video-storage",
+            region: "us-east-1",
+          },
         },
-        body: JSON.stringify({
-            uuid:"123e4567-e89b-12d3-a456-426614174000",
-            title: videoTitle,
-            description: videoDescription,
-            tags: videoTags,
-            creationDate : new Date().toISOString(),
-            uploader: userName,
-        }),
       });
-      if(!response.ok) {
+
+      const body = JSON.stringify({
+        uuid: uuid,
+        title: videoTitle,
+        description: videoDescription,
+        tags: videoTags.split(","),
+        creationDate: new Date().toISOString(),
+        uploader: userName,
+      });
+
+      // Upload to DynamoDB
+      const response = await fetch(
+        "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: body,
+        },
+      );
+      if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
