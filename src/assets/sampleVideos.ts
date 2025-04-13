@@ -1,6 +1,8 @@
 import sampleThumbnail from "@/assets/sample-thumbnail.jpg";
+import { v4 as uuidv4 } from "uuid";
 
 export interface Video {
+  uuid: string;
   title: string;
   videoSrc: string;
   uploader: string;
@@ -13,6 +15,7 @@ export interface Video {
 
 const sampleVideos: Video[] = [
   {
+    uuid: uuidv4(),
     title: "Title 1",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -23,6 +26,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 2",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -33,6 +37,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 3",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -43,6 +48,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 4",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -53,6 +59,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -63,6 +70,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -73,6 +81,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -83,6 +92,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -93,6 +103,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -103,6 +114,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -113,6 +125,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -123,6 +136,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -133,6 +147,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
+    uuid: uuidv4(),
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",

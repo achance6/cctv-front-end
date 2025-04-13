@@ -27,17 +27,7 @@ function HomePage() {
           itemsPerPage={6}
           className={"container mx-auto px-4"}
         >
-          {(item, index) => (
-            <VideoCard
-
-              key={index}
-              title={item.title}
-              channelName={item.channelName}
-              views={parseInt(item.views)}
-              time={item.time}
-              thumbnail={item.thumbnail}
-            />
-          )}
+          {(item) => <VideoCard {...item} />}
         </Collection>
       </Card>
     </View>

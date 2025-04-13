@@ -1,18 +1,17 @@
 import "@/assets/css/videoCard.css";
 import { Card, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
+import { Video } from "@/assets/sampleVideos.ts";
 
-interface VideoCardProps {
-  thumbnail: string;
-  title: string;
-  channelName: string;
-  views: number;
-  time: string;
-}
-
-function VideoCard(props: VideoCardProps) {
+function VideoCard(video: Video) {
   return (
-    <Link to={"/playback"} className={"hover:bg-fuchsia-300"}>
+    <Link
+      to={{
+        pathname: "/playback",
+        search: "?v=" + video.uuid,
+      }}
+      className={"hover:bg-fuchsia-300"}
+    >
       <Card
         className={"bg-white hover:bg-fuchsia-300"}
         variation={"elevated"}
@@ -22,8 +21,8 @@ function VideoCard(props: VideoCardProps) {
       >
         <Image
           className={"videoThumbnail"}
-          src={props.thumbnail}
-          alt={props.title}
+          src={video.thumbnail}
+          alt={video.title}
         />
         <View>
           <Text
@@ -32,7 +31,7 @@ function VideoCard(props: VideoCardProps) {
             fontWeight={"bold"}
             fontSize={"1.1rem"}
           >
-            {props.title}
+            {video.title}
           </Text>
           <Flex gap={".7rem"} className={"videoInfo"}>
             {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}
@@ -41,10 +40,10 @@ function VideoCard(props: VideoCardProps) {
               isTruncated={true}
               fontStyle={"italic"}
             >
-              {props.channelName}
+              {video.channelName}
             </Text>
             <Text className="videoData" paddingLeft={"1rem"}>
-              {props.views} views : {props.time}
+              {video.views} views : {video.time}
             </Text>
           </Flex>
         </View>
