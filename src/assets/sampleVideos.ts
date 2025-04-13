@@ -1,5 +1,4 @@
 import sampleThumbnail from "@/assets/sample-thumbnail.jpg";
-import { v4 as uuidv4 } from "uuid";
 
 export interface Video {
   uuid: string;
@@ -15,7 +14,7 @@ export interface Video {
 
 const sampleVideos: Video[] = [
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 1",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -26,7 +25,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 2",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -37,7 +36,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 3",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -48,7 +47,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 4",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -59,7 +58,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -70,7 +69,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -81,7 +80,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -92,7 +91,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -103,7 +102,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -114,7 +113,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -125,7 +124,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -136,7 +135,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
@@ -147,7 +146,7 @@ const sampleVideos: Video[] = [
     tags: [],
   },
   {
-    uuid: uuidv4(),
+    uuid: "a69da49a-66ff-4275-8df5-be51bee10084",
     title: "Title 5",
     videoSrc: "video.mp4",
     uploader: "test@test.com",
