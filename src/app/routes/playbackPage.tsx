@@ -25,9 +25,18 @@ function PlaybackPage() {
     "TAG 5",
   ]);
   const [uploader, setUploader] = useState("Uploader Name");
-  const [presignedUrl, setPresignedUrl] = useState<string | undefined>(
-    undefined,
-  );
+  const [highResPresignedUrl, setHighResPresignedUrl] = useState<
+    string | undefined
+  >(undefined);
+  const [mediumResPresignedUrl, setMediumResPresignedUrl] = useState<
+    string | undefined
+  >(undefined);
+  const [lowResPresignedUrl, setLowResPresignedUrl] = useState<
+    string | undefined
+  >(undefined);
+  const [ultraLowResPresignedUrl, setUltraLowResPresignedUrl] = useState<
+    string | undefined
+  >(undefined);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -57,7 +66,64 @@ function PlaybackPage() {
       path: "mp4/" + uuid + "-high-res.mp4",
     })
       .then(function (result) {
-        setPresignedUrl(result.url.toString());
+        setHighResPresignedUrl(result.url.toString());
+      })
+      .catch((unknown: unknown) => {
+        console.error("Failed to load video data:", unknown);
+      });
+
+    getUrl({
+      options: {
+        bucket: {
+          bucketName: "cctv-transcoded-video-storage",
+          region: "us-east-1",
+        },
+        validateObjectExistence: true,
+        expiresIn: 300,
+        useAccelerateEndpoint: false,
+      },
+      path: "mp4/" + uuid + "-medium-res.mp4",
+    })
+      .then(function (result) {
+        setMediumResPresignedUrl(result.url.toString());
+      })
+      .catch((unknown: unknown) => {
+        console.error("Failed to load video data:", unknown);
+      });
+
+    getUrl({
+      options: {
+        bucket: {
+          bucketName: "cctv-transcoded-video-storage",
+          region: "us-east-1",
+        },
+        validateObjectExistence: true,
+        expiresIn: 300,
+        useAccelerateEndpoint: false,
+      },
+      path: "mp4/" + uuid + "-low-res.mp4",
+    })
+      .then(function (result) {
+        setLowResPresignedUrl(result.url.toString());
+      })
+      .catch((unknown: unknown) => {
+        console.error("Failed to load video data:", unknown);
+      });
+
+    getUrl({
+      options: {
+        bucket: {
+          bucketName: "cctv-transcoded-video-storage",
+          region: "us-east-1",
+        },
+        validateObjectExistence: true,
+        expiresIn: 300,
+        useAccelerateEndpoint: false,
+      },
+      path: "mp4/" + uuid + "-ultra-low-res.mp4",
+    })
+      .then(function (result) {
+        setUltraLowResPresignedUrl(result.url.toString());
       })
       .catch((unknown: unknown) => {
         console.error("Failed to load video data:", unknown);
@@ -73,8 +139,40 @@ function PlaybackPage() {
         justifyContent={"center"}
       >
         <Flex direction={"column"} className={"video-container"}>
-          {presignedUrl ? (
-            <MediaPlayer title="Sprite Fight" src={presignedUrl}>
+          {highResPresignedUrl &&
+          mediumResPresignedUrl &&
+          lowResPresignedUrl &&
+          ultraLowResPresignedUrl ? (
+            <MediaPlayer
+              title="Sprite Fight"
+              controls={true}
+              src={[
+                {
+                  src: highResPresignedUrl,
+                  type: "video/mp4",
+                  width: 1920,
+                  height: 1080,
+                },
+                {
+                  src: mediumResPresignedUrl,
+                  type: "video/mp4",
+                  width: 1280,
+                  height: 720,
+                },
+                {
+                  src: lowResPresignedUrl,
+                  type: "video/mp4",
+                  width: 853,
+                  height: 480,
+                },
+                {
+                  src: ultraLowResPresignedUrl,
+                  type: "video/mp4",
+                  width: 640,
+                  height: 360,
+                },
+              ]}
+            >
               <MediaProvider />
             </MediaPlayer>
           ) : (
