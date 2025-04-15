@@ -31,6 +31,8 @@ function PlaybackPage() {
   const [ultraLowResPresignedUrl, setUltraLowResPresignedUrl] = useState<
     string | undefined
   >(undefined);
+  const [description, setDescription] = useState("Description");
+  const [title, setTitle] = useState("Title");
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
