@@ -27,7 +27,7 @@ function HomePage() {
           itemsPerPage={6}
           className={"container mx-auto px-4"}
         >
-          {(item) => <VideoCard {...item} />}
+          {(item, key) => <VideoCard {...item} key={key} />}
         </Collection>
       </Card>
     </View>
