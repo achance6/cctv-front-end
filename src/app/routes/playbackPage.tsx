@@ -41,6 +41,8 @@ function PlaybackPage() {
       .then((data: VideoApi) => {
         setUploader(data.uploader);
         setTags(data.tags);
+        setTitle(data.title);
+        setDescription(data.description);
       })
       .catch((err: unknown) => {
         console.error("Failed to fetch video data:", err);
