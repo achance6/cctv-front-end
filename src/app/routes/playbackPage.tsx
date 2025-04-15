@@ -25,6 +25,8 @@ function PlaybackPage() {
     "TAG 5",
   ]);
   const [uploader, setUploader] = useState("Uploader Name");
+  const [description, setDescription] = useState("Description");
+  const [title, setTitle] = useState("Title");
   const [presignedUrl, setPresignedUrl] = useState<string | undefined>(
     undefined,
   );
