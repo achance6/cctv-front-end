@@ -9,30 +9,19 @@ import { Button, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
 import Video from "@/types/video.ts";
 
 function PlaybackPage() {
-  const [video, setVideo] = useState<Video>({
-    creationDateTime: new Date(0),
-    description: "",
-    tags: [],
-    time: 0,
-    title: "",
-    uploader: "",
-    videoId: "",
-    viewCount: 0,
-  });
-  const [highResPresignedUrl, setHighResPresignedUrl] = useState<
-    string | undefined
-  >(undefined);
-  const [mediumResPresignedUrl, setMediumResPresignedUrl] = useState<
-    string | undefined
-  >(undefined);
-  const [lowResPresignedUrl, setLowResPresignedUrl] = useState<
-    string | undefined
-  >(undefined);
-  const [ultraLowResPresignedUrl, setUltraLowResPresignedUrl] = useState<
-    string | undefined
-  >(undefined);
+  const [tags, setTags] = useState([
+    "TAG 1",
+    "TAG 2",
+    "TAG 3",
+    "TAG 4",
+    "TAG 5",
+  ]);
+  const [uploader, setUploader] = useState("Uploader Name");
   const [description, setDescription] = useState("Description");
   const [title, setTitle] = useState("Title");
+  const [presignedUrl, setPresignedUrl] = useState<string | undefined>(
+    undefined,
+  );
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
