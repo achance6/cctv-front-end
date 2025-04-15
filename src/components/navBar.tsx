@@ -61,7 +61,7 @@ function NavBar() {
     >
       <Link to={"/"} className={"w-14 hover:drop-shadow-xl"}>
         <Image alt={"logo"} src={logo}
-          height="100px" width="100px"/>
+          height="100px" objectFit="contain"/>
       </Link>
 
       <SearchField
