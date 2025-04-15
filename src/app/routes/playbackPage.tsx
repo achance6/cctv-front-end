@@ -3,6 +3,9 @@ import "@/assets/css/playbackPage.css";
 import NavBar from "@/components/navBar.tsx";
 import { useSearchParams } from "react-router";
 import { getUrl } from "aws-amplify/storage";
+import "@vidstack/react/player/styles/base.css";
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
 
 export interface VideoApi {
   uuid: string;
@@ -55,43 +58,51 @@ function PlaybackPage() {
     })
       .then(function (result) {
         setPresignedUrl(result.url.toString());
-        const videoPlayer = document.getElementById(
-          "videoPlayer",
-        ) as HTMLVideoElement;
-        videoPlayer.load();
       })
       .catch((unknown: unknown) => {
-        alert(unknown);
+        console.error("Failed to load video data:", unknown);
       });
   }, [searchParams]);
 
   return (
-    <div className="tc">
+    <View>
       <NavBar />
-      <div className="wrapper">
-        <div className="video-container">
-          <video id="videoPlayer" controls>
-            <source src={presignedUrl} type="video/mp4" />
-          </video>
-        </div>
+      <Flex
+        direction={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Flex direction={"column"} className={"video-container"}>
+          {presignedUrl ? (
+            <MediaPlayer title="Sprite Fight" src={presignedUrl}>
+              <MediaProvider />
+            </MediaPlayer>
+          ) : (
+            <Text>Loading video...</Text>
+          )}
+        </Flex>
 
-        <div className="controls-container">
-          <div className="upload-btn-container">
-            <button type={"button"} className="uploadUser-btn">
+        <Flex
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          width={"100%"}
+        >
+          <Flex justifyContent={"flex-start"}>
+            <Button type={"button"} className="uploadUser-btn">
               {uploader}
-            </button>
-          </div>
+            </Button>
+          </Flex>
 
-          <div className="tag-container">
+          <Flex gap={"10px"}>
             {tags.map((tag) => (
-              <button type={"button"} key={tag} className="tag-btn">
+              <Button type={"button"} key={tag} className="tag-btn">
                 {tag}
-              </button>
+              </Button>
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Flex>
+        </Flex>
+      </Flex>
+    </View>
   );
 }
 

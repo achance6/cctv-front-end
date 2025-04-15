@@ -1,22 +1,10 @@
 body {
     background: linear-gradient(to right, #76c7c0, #1e3c72);
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    margin: 0; 
-}
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
-    gap: 10px;
-    width: 90%;
-    max-width: 1200px;
-    height: 100%; 
-    padding-bottom: 150px; 
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .video-container {
@@ -26,8 +14,6 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
 }
 
 video {
@@ -36,23 +22,6 @@ video {
     height: auto; 
     border-radius: 8px;
     display: block;
-}
-
-.controls-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.upload-btn-container {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.tag-container {
-    display: flex;
-    gap: 10px;
 }
 
 .uploadUser-btn {
