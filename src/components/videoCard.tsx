@@ -2,9 +2,33 @@ import "@/assets/css/videoCard.css";
 import { Card, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
 import Video from "@/types/video.ts";
-import sampleThumbnail from "@/assets/sample-thumbnail.jpg";
+import { getUrl } from "aws-amplify/storage";
+import { useEffect, useState } from "react";
 
 function VideoCard(video: Video) {
+  const [thumbnailSrc, setThumbnailSrc] = useState("");
+
+  useEffect(() => {
+    getUrl({
+      options: {
+        bucket: {
+          bucketName: "cctv-transcoded-video-storage",
+          region: "us-east-1",
+        },
+        validateObjectExistence: true,
+        expiresIn: 300,
+        useAccelerateEndpoint: false,
+      },
+      path: "thumbs/" + video.uuid + ".0000000.jpg",
+    })
+      .then(function (result) {
+        setThumbnailSrc(result.url.toString());
+      })
+      .catch((unknown: unknown) => {
+        console.error("Failed to load video data:", unknown);
+      });
+  });
+
   return (
     <Link
       to={{
@@ -21,9 +45,11 @@ function VideoCard(video: Video) {
         border={"1px solid gray"}
       >
         <Image
-          className={"videoThumbnail"}
-          src={sampleThumbnail}
+          src={thumbnailSrc ? thumbnailSrc : undefined}
           alt={video.title}
+          objectFit={"cover"}
+          width={"100%"}
+          height={"100%"}
         />
         <View>
           <Text
