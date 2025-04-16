@@ -1,4 +1,3 @@
-import "@/assets/css/videoCard.css";
 import { Card, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
 import Video from "@/types/video.ts";
@@ -54,22 +53,18 @@ function VideoCard(video: Video) {
         <View>
           <Text
             isTruncated={true}
-            className={"videoTitle"}
             fontWeight={"bold"}
             fontSize={"1.1rem"}
+            padding-left={"20px"}
           >
             {video.title}
           </Text>
-          <Flex gap={".7rem"} className={"videoInfo"}>
+          <Flex gap={".7rem"} direction={"row"} paddingLeft={"20px"}>
             {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}
-            <Text
-              className="videoChannelName"
-              isTruncated={true}
-              fontStyle={"italic"}
-            >
+            <Text isTruncated={true} fontStyle={"italic"} fontWeight={"bold"}>
               {video.uploader}
             </Text>
-            <Text className="videoData" paddingLeft={"1rem"}>
+            <Text paddingLeft={"1rem"} fontSize={"1rem"}>
               {video.views} views : {video.time}
             </Text>
           </Flex>
