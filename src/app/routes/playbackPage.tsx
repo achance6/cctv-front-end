@@ -6,15 +6,7 @@ import { getUrl } from "aws-amplify/storage";
 import "@vidstack/react/player/styles/base.css";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
-
-export interface VideoApi {
-  uuid: string;
-  title: string;
-  description: string;
-  tags: string[];
-  creationDate: Date;
-  uploader: string;
-}
+import Video from "@/types/video.ts";
 
 function PlaybackPage() {
   const [tags, setTags] = useState([
@@ -45,7 +37,7 @@ function PlaybackPage() {
       "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video/" + uuid,
     )
       .then((response) => response.json())
-      .then((data: VideoApi) => {
+      .then((data: Video) => {
         setUploader(data.uploader);
         setTags(data.tags);
       })

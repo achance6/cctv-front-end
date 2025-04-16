@@ -1,7 +1,8 @@
 import "@/assets/css/videoCard.css";
 import { Card, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
-import { Video } from "@/assets/sampleVideos.ts";
+import Video from "@/types/video.ts";
+import sampleThumbnail from "@/assets/sample-thumbnail.jpg";
 
 function VideoCard(video: Video) {
   return (
@@ -21,7 +22,7 @@ function VideoCard(video: Video) {
       >
         <Image
           className={"videoThumbnail"}
-          src={video.thumbnail}
+          src={sampleThumbnail}
           alt={video.title}
         />
         <View>
@@ -40,7 +41,7 @@ function VideoCard(video: Video) {
               isTruncated={true}
               fontStyle={"italic"}
             >
-              {video.channelName}
+              {video.uploader}
             </Text>
             <Text className="videoData" paddingLeft={"1rem"}>
               {video.views} views : {video.time}
