@@ -1,4 +1,4 @@
-import { Card, Flex, Image, Text, View } from "@aws-amplify/ui-react";
+import { Card, Flex, Image, Text } from "@aws-amplify/ui-react";
 import { Link } from "react-router";
 import Video from "@/types/video.ts";
 import { getUrl } from "aws-amplify/storage";
@@ -39,8 +39,8 @@ function VideoCard(video: Video) {
       <Card
         className={"bg-white hover:bg-fuchsia-300"}
         variation={"elevated"}
-        width={"350px"}
-        height={"250px"}
+        width={"400px"}
+        height={"330px"}
         border={"1px solid gray"}
       >
         <Image
@@ -48,9 +48,9 @@ function VideoCard(video: Video) {
           alt={video.title}
           objectFit={"cover"}
           width={"100%"}
-          height={"100%"}
+          height={"75%"}
         />
-        <View>
+        <Flex direction={"column"}>
           <Text
             isTruncated={true}
             fontWeight={"bold"}
@@ -59,16 +59,20 @@ function VideoCard(video: Video) {
           >
             {video.title}
           </Text>
-          <Flex gap={".7rem"} direction={"row"} paddingLeft={"20px"}>
-            {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}
+          <Flex gap={".7rem"} direction={"row"}>
             <Text isTruncated={true} fontStyle={"italic"} fontWeight={"bold"}>
               {video.uploader}
             </Text>
+
+            {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}
             <Text paddingLeft={"1rem"} fontSize={"1rem"}>
-              {video.views} views : {video.time}
+              {video.views} views
+            </Text>
+            <Text paddingLeft={"1rem"} fontSize={"1rem"}>
+              {new Date(video.creationDate).toDateString()}
             </Text>
           </Flex>
-        </View>
+        </Flex>
       </Card>
     </Link>
   );
