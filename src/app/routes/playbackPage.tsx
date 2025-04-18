@@ -17,6 +17,8 @@ function PlaybackPage() {
     "TAG 5",
   ]);
   const [uploader, setUploader] = useState("Uploader Name");
+  const [title, setTitle] = useState("title")
+  const [description, setDescription] = useState("description")
   const [highResPresignedUrl, setHighResPresignedUrl] = useState<
     string | undefined
   >(undefined);
@@ -40,6 +42,8 @@ function PlaybackPage() {
       .then((data: Video) => {
         setUploader(data.uploader);
         setTags(data.tags);
+        setTitle(data.title);
+        setDescription(data.description);
       })
       .catch((err: unknown) => {
         console.error("Failed to fetch video data:", err);
@@ -130,6 +134,10 @@ function PlaybackPage() {
         alignItems={"center"}
         justifyContent={"center"}
       >
+        <Text as="h2" className="video-title">
+          {title}
+        </Text>
+        
         <Flex direction={"column"} className={"video-container"}>
           {highResPresignedUrl &&
           mediumResPresignedUrl &&
@@ -191,6 +199,7 @@ function PlaybackPage() {
             ))}
           </Flex>
         </Flex>
+        <Text className="video-description">{description}</Text>
       </Flex>
     </View>
   );
