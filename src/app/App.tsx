@@ -51,7 +51,7 @@ export default function App() {
               <Route index element={<HomePage />} />
               <Route path={"/upload"} element={<UploadPage />} />
               <Route path={"/playback"} element={<PlaybackPage />} />
-              <Route path={"/profile"} element={<Profile />} />
+              <Route path={"/profile/:username"} element={<Profile />} />
             </Routes>
           </BrowserRouter>
         );

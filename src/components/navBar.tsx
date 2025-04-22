@@ -38,7 +38,7 @@ function NavBar() {
       }
     };
 
-    loadAvatar();
+    void loadAvatar();
   }, [firstLetter]);
 
   const search = () => {
@@ -47,7 +47,6 @@ function NavBar() {
 
   return (
     <Flex
-    
       direction={"row"}
       justifyContent={"space-around"}
       alignItems={"center"}
@@ -60,8 +59,7 @@ function NavBar() {
       className={"shrink-0"}
     >
       <Link to={"/"} className={"w-14 hover:drop-shadow-xl"}>
-        <Image alt={"logo"} src={logo}
-          height="100px" objectFit="contain"/>
+        <Image alt={"logo"} src={logo} height="100px" objectFit="contain" />
       </Link>
 
       <SearchField
@@ -75,19 +73,19 @@ function NavBar() {
         onSubmit={search}
       />
       <Link to={"/upload"}>
-        <Button type={"button"} className={"Upload Button"}
-        variation="primary" colorTheme="info">
+        <Button
+          type={"button"}
+          className={"Upload Button"}
+          variation="primary"
+          colorTheme="info"
+        >
           + Upload
         </Button>
       </Link>
-
-      {/*}
-            <div>
-                Hello {localStorage.getItem("userLoginId") ?? "user not found"}
-            </div>
-            */}
-
-      <Link to={"/profile"} className={"hover:drop-shadow-xl"}>
+      <Link
+        to={"/profile/" + (user.signInDetails?.loginId ?? "")}
+        className={"hover:drop-shadow-xl"}
+      >
         <Avatar src={avatarSrc ?? defaultAvatar} size={"large"} />
       </Link>
     </Flex>
