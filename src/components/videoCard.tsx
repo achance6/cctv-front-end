@@ -66,7 +66,7 @@ function VideoCard(video: Video) {
 
             {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}
             <Text paddingLeft={"1rem"} fontSize={"1rem"}>
-              {video.views} views
+              {video.views ?? 0} views
             </Text>
             <Text paddingLeft={"1rem"} fontSize={"1rem"}>
               {new Date(video.creationDate).toDateString()}
