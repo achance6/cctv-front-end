@@ -5,18 +5,18 @@ import sampleVideos from "@/assets/sampleVideos";
 
 function HomePage() {
   return (
-    <View width={"100%"} className={"bg-gray-200"}>
+    <View width={"100%"} >
       <NavBar />
 
       <Heading
         level={1}
         textAlign={"center"}
-        className={"text-4xl font-bold my-8"}
+        className={"text-3xl font-bold my-8 text-white"}
       >
-        Home Page
+        Home
       </Heading>
 
-      <Card>
+      <Card className="w-full flex justify-center">
         <Collection
           type={"list"}
           direction={"row"}
@@ -25,7 +25,7 @@ function HomePage() {
           items={sampleVideos}
           isPaginated={true}
           itemsPerPage={6}
-          className={"container mx-auto px-4"}
+          className={"flex flex-wrap justify-center items-center gap-4 mx-auto px-4"}
         >
           {(item, index) => (
             <VideoCard
