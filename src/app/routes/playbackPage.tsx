@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import "@/assets/css/playbackPage.css";
 import NavBar from "@/components/navBar.tsx";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { getUrl } from "aws-amplify/storage";
 import "@vidstack/react/player/styles/base.css";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
-import { Button, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useAuthenticator,
+  View,
+} from "@aws-amplify/ui-react";
 import Video from "@/types/video.ts";
 
 function PlaybackPage() {
@@ -32,6 +39,7 @@ function PlaybackPage() {
     string | undefined
   >(undefined);
   const [searchParams] = useSearchParams();
+  const { user } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
     const uuid = searchParams.get("v") ?? "";
@@ -192,9 +200,15 @@ function PlaybackPage() {
           width={"100%"}
         >
           <Flex justifyContent={"flex-start"}>
-            <Button type={"button"} className="uploadUser-btn">
-              {uploader}
-            </Button>
+            <Link to={"/profile/" + (user.signInDetails?.loginId ?? "")}>
+              <Button
+                id={"upload-user"}
+                type={"button"}
+                className="uploadUser-btn"
+              >
+                {uploader}
+              </Button>
+            </Link>
           </Flex>
 
           <Flex gap={"10px"}>
