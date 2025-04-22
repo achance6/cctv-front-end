@@ -23,10 +23,10 @@ function Profile() {
     const apiGatewayUrl =
       "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com";
     const videosEndpoint = "/video/videos";
-    if (!friendlyUsername) {
+    if (!username) {
       throw new Error("User not found!");
     }
-    const queryParam = "?uploader=" + friendlyUsername;
+    const queryParam = "?uploader=" + username;
     fetch(apiGatewayUrl + videosEndpoint + queryParam)
       .then((response) => response.json())
       .then((data: Video[]) => {

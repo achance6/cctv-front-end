@@ -5,14 +5,7 @@ import { Link, useSearchParams } from "react-router";
 import { getUrl } from "aws-amplify/storage";
 import "@vidstack/react/player/styles/base.css";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
-import {
-  Button,
-  Flex,
-  Heading,
-  Text,
-  useAuthenticator,
-  View,
-} from "@aws-amplify/ui-react";
+import { Button, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
 import Video from "@/types/video.ts";
 
 function PlaybackPage() {
@@ -39,7 +32,6 @@ function PlaybackPage() {
     string | undefined
   >(undefined);
   const [searchParams] = useSearchParams();
-  const { user } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
     const uuid = searchParams.get("v") ?? "";
@@ -200,7 +192,7 @@ function PlaybackPage() {
           width={"100%"}
         >
           <Flex justifyContent={"flex-start"}>
-            <Link to={"/profile/" + (user.signInDetails?.loginId ?? "")}>
+            <Link to={"/profile/" + uploader}>
               <Button
                 id={"upload-user"}
                 type={"button"}
