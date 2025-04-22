@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router";
 import { getUrl } from "aws-amplify/storage";
 import "@vidstack/react/player/styles/base.css";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
-import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
+import { Button, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
 import Video from "@/types/video.ts";
 
 function PlaybackPage() {
@@ -17,8 +17,8 @@ function PlaybackPage() {
     "TAG 5",
   ]);
   const [uploader, setUploader] = useState("Uploader Name");
-  const [title, setTitle] = useState("title")
-  const [description, setDescription] = useState("description")
+  const [title, setTitle] = useState("title");
+  const [description, setDescription] = useState("description");
   const [highResPresignedUrl, setHighResPresignedUrl] = useState<
     string | undefined
   >(undefined);
@@ -134,11 +134,17 @@ function PlaybackPage() {
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <Text as="h2" className="video-title">
+        <Heading level={2} fontWeight={"bold"} marginBottom={"1rem"}>
           {title}
-        </Text>
-        
-        <Flex direction={"column"} className={"video-container"}>
+        </Heading>
+
+        <Flex
+          direction={"column"}
+          width={"100%"}
+          maxWidth={"1400px"}
+          backgroundColor={"black"}
+          boxShadow={"0 4px 10px rgba(0, 0, 0, 0.3)"}
+        >
           {highResPresignedUrl &&
           mediumResPresignedUrl &&
           lowResPresignedUrl &&
@@ -199,7 +205,9 @@ function PlaybackPage() {
             ))}
           </Flex>
         </Flex>
-        <Text className="video-description">{description}</Text>
+        <Text fontSize={"1rem"} lineHeight={"1.4"}>
+          {description}
+        </Text>
       </Flex>
     </View>
   );
