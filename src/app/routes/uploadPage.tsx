@@ -28,9 +28,7 @@ function UploadPage() {
   >("idle");
   const navigate = useNavigate();
   const { user } = useAuthenticator((context) => [context.user]);
-  const userDetails = user.signInDetails?.loginId;
-  const userName = userDetails?.substring(0, userDetails.lastIndexOf("@"));
-
+  const userId = user.signInDetails?.loginId;
   const handleCancel = async () => {
     await navigate("/");
   };
@@ -72,7 +70,7 @@ function UploadPage() {
         description: videoDescription,
         tags: videoTags.split(","),
         creationDate: new Date().toISOString(),
-        uploader: userName,
+        uploader: userId,
       });
 
       // Upload to DynamoDB
