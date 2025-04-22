@@ -1,8 +1,8 @@
 import NavBar from "@/components/navBar";
-import VideoCard from "@/components/videoCard";
-import { Collection, Heading, View } from "@aws-amplify/ui-react";
+import { Heading, View } from "@aws-amplify/ui-react";
 import { useEffect, useState } from "react";
 import Video from "@/types/video.ts";
+import VideoCollection from "@/components/videoCollection.tsx";
 
 function HomePage() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -33,18 +33,7 @@ function HomePage() {
         Home Page
       </Heading>
 
-      <Collection
-        type={"list"}
-        direction={"row"}
-        gap={"8"}
-        wrap={"wrap"}
-        items={videos}
-        isPaginated={true}
-        itemsPerPage={6}
-        className={"container mx-auto px-4"}
-      >
-        {(item, key) => <VideoCard {...item} key={key} />}
-      </Collection>
+      <VideoCollection videos={videos} />
     </View>
   );
 }
