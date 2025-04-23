@@ -42,11 +42,6 @@ function UploadPage() {
     if (videoTitle === "" || videoDescription === "" || videoTags === "") {
       alert("Please fill in all fields");
       return;
-    } else {
-      console.log("Uploading...");
-      console.log("Title:", videoTitle);
-      console.log("Description:", videoDescription);
-      console.log("Tags:", videoTags.split(","));
     }
 
     try {
