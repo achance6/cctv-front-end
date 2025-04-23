@@ -9,6 +9,8 @@ import { AuthProvider } from "react-oidc-context";
 import { Amplify } from "aws-amplify";
 import PlaybackPage from "@/app/routes/playbackPage.tsx";
 import Profile from "@/app/routes/profile.tsx";
+import SearchPage from "@/app/routes/searchPage.tsx";
+import ErrorSearchPage from "./routes/errorSearchPage.tsx";
 
 const cognitoAuthConfig = {
   authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ow9MYBmi1",
@@ -52,6 +54,8 @@ export default function App() {
               <Route path={"/upload"} element={<UploadPage />} />
               <Route path={"/playback"} element={<PlaybackPage />} />
               <Route path={"/profile/:username"} element={<Profile />} />
+              <Route path={"/search"} element={<ErrorSearchPage />} />
+              <Route path="/search/:query" element={<SearchPage />} />
             </Routes>
           </BrowserRouter>
         );

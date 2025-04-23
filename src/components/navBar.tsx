@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Avatar,
   Button,
@@ -11,12 +12,14 @@ import { Link } from "react-router";
 import logo from "@/assets/logo.png";
 import defaultAvatar from "@/assets/default.png";
 
+
 const avatarImages = import.meta.glob("/src/assets/avatars/*.png");
 
 function NavBar() {
   const { user } = useAuthenticator((context) => [context.user]);
   const [searchValue, setSearchValue] = React.useState("");
   const [avatarSrc, setAvatarSrc] = useState<string | null>(null);
+  const navigate = useNavigate();
   const firstLetter =
     user.signInDetails?.loginId?.charAt(0).toLowerCase() ?? "";
 
@@ -41,9 +44,21 @@ function NavBar() {
     void loadAvatar();
   }, [firstLetter]);
 
-  const search = () => {
-    console.log("Searching for ", searchValue);
-  };
+  const handleSearch = async () =>{
+    if(searchValue ==="" ) {
+      await navigate("/search");
+
+    }else{
+      try{
+        await navigate("/search/" + searchValue);
+        setSearchValue("");
+      }catch (error) {
+        console.error("Error during search:", error);
+      }
+
+    }
+  }
+
 
   return (
     <Flex
@@ -70,7 +85,8 @@ function NavBar() {
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
-        onSubmit={search}
+        onSubmit={handleSearch}
+        value={searchValue}
       />
       <Link to={"/upload"}>
         <Button
