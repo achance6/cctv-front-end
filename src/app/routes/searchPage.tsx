@@ -22,8 +22,9 @@ const SearchPage = () => {
       })
       .catch((err: unknown) => {
         console.error("Failed to fetch video data:", err);
+        setVideos([]);
       });
-  }, []);
+  }, [query]);
 
   return (
     <View>
