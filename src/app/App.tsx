@@ -55,7 +55,7 @@ export default function App() {
               <Route path={"/playback"} element={<PlaybackPage />} />
               <Route path={"/profile/:username"} element={<Profile />} />
               <Route path={"/search"} element={<ErrorSearchPage />} />
-              <Route path="/search/:query" element={<SearchPage />} />
+              <Route path={"/search/:query"} element={<SearchPage />} />
             </Routes>
           </BrowserRouter>
         );

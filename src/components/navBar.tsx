@@ -50,7 +50,10 @@ function NavBar() {
 
     }else{
       try{
+       localStorage.removeItem("searchQuery");
+        localStorage.setItem("searchQuery", searchValue);
         await navigate("/search/" + searchValue);
+        window.location.reload();
         setSearchValue("");
       }catch (error) {
         console.error("Error during search:", error);
