@@ -1,18 +1,39 @@
 import NavBar from "@/components/navBar";
 import { useParams } from "react-router";
-import { Heading, View } from "@aws-amplify/ui-react";
+import { Flex, Heading, View } from "@aws-amplify/ui-react";
+import VideoCollection from "@/components/videoCollection.tsx";
+import { useEffect, useState } from "react";
+import Video from "@/types/video.ts";
 
 const SearchPage = () => {
   const params = useParams();
-  const query = params.query; // Retrieve the query parameter from the URL
-  console.log("Query parameter:", query); // Log the query parameter to the console
+  const query = params.query;
+  const [videos, setVideos] = useState<Video[]>([]);
+
+  useEffect(() => {
+    const apiGatewayUrl =
+      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com";
+    const videosEndpoint = "/video/videos";
+    const queryParam = "?search=" + (query ?? "");
+    fetch(apiGatewayUrl + videosEndpoint + queryParam)
+      .then((response) => response.json())
+      .then((data: Video[]) => {
+        setVideos(data);
+      })
+      .catch((err: unknown) => {
+        console.error("Failed to fetch video data:", err);
+      });
+  }, []);
 
   return (
     <View>
       <NavBar />
-      <Heading level={1} className="text-4xl text-center mt-8">
-        Search Page
-      </Heading>
+      <Flex direction="column">
+        <Heading level={1} className="text-4xl text-center mt-8">
+          Search Page
+        </Heading>
+        <VideoCollection videos={videos} />
+      </Flex>
     </View>
   );
 };
