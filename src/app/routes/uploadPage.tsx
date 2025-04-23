@@ -66,6 +66,7 @@ function UploadPage() {
         tags: videoTags.split(","),
         creationDate: new Date().toISOString(),
         uploader: userId,
+        viewCount: 0,
       });
 
       // Upload to DynamoDB
