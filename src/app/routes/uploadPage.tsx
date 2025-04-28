@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { uploadData } from "aws-amplify/storage/s3";
 import { v4 as uuidv4 } from "uuid";
+import Video from "@/types/video.ts";
 
 function UploadPage() {
   const [videoTitle, setVideoTitle] = useState("");
@@ -28,7 +29,10 @@ function UploadPage() {
   >("idle");
   const navigate = useNavigate();
   const { user } = useAuthenticator((context) => [context.user]);
-  const userId = user.signInDetails?.loginId;
+  if (!user.signInDetails?.loginId) {
+    throw new Error("No user signIn details found.");
+  }
+  const userId = user.signInDetails.loginId;
   const handleCancel = async () => {
     await navigate("/");
   };
@@ -44,49 +48,45 @@ function UploadPage() {
       return;
     }
 
-    try {
-      const uuid = uuidv4();
+    const uuid = uuidv4();
 
-      // Upload to S3
-      uploadData({
-        path: ({ identityId }) => `${identityId?.toString() ?? ""}/${uuid}`,
-        data: file,
-        options: {
-          bucket: {
-            bucketName: "cctv-video-storage",
-            region: "us-east-1",
-          },
+    // Upload to S3
+    uploadData({
+      path: ({ identityId }) => `${identityId?.toString() ?? ""}/${uuid}`,
+      data: file,
+      options: {
+        bucket: {
+          bucketName: "cctv-video-storage",
+          region: "us-east-1",
         },
-      });
+      },
+    });
 
-      const body = JSON.stringify({
-        uuid: uuid,
-        title: videoTitle,
-        description: videoDescription,
-        tags: videoTags.split(","),
-        creationDate: new Date().toISOString(),
-        uploader: userId,
-        viewCount: 0,
-      });
+    const video: Video = {
+      videoId: uuid,
+      title: videoTitle,
+      description: videoDescription,
+      tags: videoTags.split(",").map((elem) => elem.trim()),
+      creationDateTime: new Date(),
+      uploader: userId,
+      viewCount: 0,
+    };
+    const body = JSON.stringify(video);
 
-      // Upload to DynamoDB
-      const response = await fetch(
-        "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: body,
+    // Upload to DynamoDB
+    const response = await fetch(
+      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
+        body: body,
+      },
+    );
+    if (response.ok) {
       setUploadStatus("success");
-    } catch (err) {
-      console.log("Upload failed:", err);
+    } else {
       setUploadStatus("error");
     }
   };
