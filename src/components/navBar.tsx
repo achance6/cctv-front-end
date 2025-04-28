@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
   Avatar,
   Button,
@@ -8,10 +8,8 @@ import {
   SearchField,
   useAuthenticator,
 } from "@aws-amplify/ui-react";
-import { Link } from "react-router";
 import logo from "@/assets/logo.png";
 import defaultAvatar from "@/assets/default.png";
-
 
 const avatarImages = import.meta.glob("/src/assets/avatars/*.png");
 
@@ -44,21 +42,14 @@ function NavBar() {
     void loadAvatar();
   }, [firstLetter]);
 
-  const handleSearch = async () =>{
-    if(searchValue ==="" ) {
-      await navigate("/search");
-
-    }else{
-      try{
-        await navigate("/search/" + searchValue);
-        setSearchValue("");
-      }catch (error) {
-        console.error("Error during search:", error);
-      }
-
+  const handleSearch = async () => {
+    if (searchValue === "") {
+      alert("Please enter a non-empty search value");
+      return;
     }
-  }
-
+    await navigate("/search/" + searchValue);
+    setSearchValue("");
+  };
 
   return (
     <Flex
