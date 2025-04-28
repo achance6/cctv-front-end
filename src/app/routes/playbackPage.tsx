@@ -9,16 +9,16 @@ import { Button, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
 import Video from "@/types/video.ts";
 
 function PlaybackPage() {
-  const [tags, setTags] = useState([
-    "TAG 1",
-    "TAG 2",
-    "TAG 3",
-    "TAG 4",
-    "TAG 5",
-  ]);
-  const [uploader, setUploader] = useState("Uploader Name");
-  const [title, setTitle] = useState("title");
-  const [description, setDescription] = useState("description");
+  const [video, setVideo] = useState<Video>({
+    creationDateTime: new Date(0),
+    description: "",
+    tags: [],
+    time: 0,
+    title: "",
+    uploader: "",
+    videoId: "",
+    viewCount: 0,
+  });
   const [highResPresignedUrl, setHighResPresignedUrl] = useState<
     string | undefined
   >(undefined);
@@ -36,17 +36,22 @@ function PlaybackPage() {
   useEffect(() => {
     const uuid = searchParams.get("v") ?? "";
     fetch(
-      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video/" + uuid,
+      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com/video/" +
+        uuid +
+        "/view",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+      },
     )
       .then((response) => response.json())
       .then((data: Video) => {
-        setUploader(data.uploader);
-        setTags(data.tags);
-        setTitle(data.title);
-        setDescription(data.description);
+        setVideo(data);
       })
       .catch((err: unknown) => {
-        console.error("Failed to fetch video data:", err);
+        console.error("Error fetching video metadata: ", err);
       });
 
     getUrl({
@@ -135,7 +140,7 @@ function PlaybackPage() {
         justifyContent={"center"}
       >
         <Heading level={2} fontWeight={"bold"} marginBottom={"1rem"}>
-          {title}
+          {video.title}
         </Heading>
 
         <Flex
@@ -192,28 +197,33 @@ function PlaybackPage() {
           width={"100%"}
         >
           <Flex justifyContent={"flex-start"}>
-            <Link to={"/profile/" + uploader}>
+            <Link to={"/profile/" + video.uploader}>
               <Button
                 id={"upload-user"}
                 type={"button"}
                 className="uploadUser-btn"
               >
-                {uploader}
+                {video.uploader}
               </Button>
             </Link>
           </Flex>
 
           <Flex gap={"10px"}>
-            {tags.map((tag) => (
+            {video.tags.map((tag) => (
               <Button type={"button"} key={tag} className="tag-btn">
                 {tag}
               </Button>
             ))}
           </Flex>
         </Flex>
-        <Text fontSize={"1rem"} lineHeight={"1.4"}>
-          {description}
-        </Text>
+        <Flex justifyContent={"start"}>
+          <Text fontSize={"1rem"} lineHeight={"1.4"}>
+            {video.description}
+          </Text>
+          <Text fontSize={"1rem"} lineHeight={"1.4"}>
+            {video.viewCount} views
+          </Text>
+        </Flex>
       </Flex>
     </View>
   );

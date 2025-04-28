@@ -1,10 +1,10 @@
 export default interface Video {
-  uuid: string;
+  videoId: string;
   title: string;
   description: string;
   tags: string[];
-  creationDate: Date;
+  creationDateTime: Date;
   uploader: string;
-  views?: number;
+  viewCount: number;
   time?: number;
 }

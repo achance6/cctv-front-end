@@ -18,7 +18,7 @@ function VideoCard(video: Video) {
         expiresIn: 300,
         useAccelerateEndpoint: false,
       },
-      path: "thumbs/" + video.uuid + ".0000000.jpg",
+      path: "thumbs/" + video.videoId + ".0000000.jpg",
     })
       .then(function (result) {
         setThumbnailSrc(result.url.toString());
@@ -32,7 +32,7 @@ function VideoCard(video: Video) {
     <Link
       to={{
         pathname: "/playback",
-        search: "?v=" + video.uuid,
+        search: "?v=" + video.videoId,
       }}
       className={"hover:bg-fuchsia-300"}
     >
@@ -66,10 +66,10 @@ function VideoCard(video: Video) {
 
             {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}
             <Text paddingLeft={"1rem"} fontSize={"1rem"}>
-              {video.views ?? 0} views
+              {video.viewCount} views
             </Text>
             <Text paddingLeft={"1rem"} fontSize={"1rem"}>
-              {new Date(video.creationDate).toDateString()}
+              {new Date(video.creationDateTime).toDateString()}
             </Text>
           </Flex>
         </Flex>
