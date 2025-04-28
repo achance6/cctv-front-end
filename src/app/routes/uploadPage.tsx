@@ -14,7 +14,7 @@ import {
   View,
 } from "@aws-amplify/ui-react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import { uploadData } from "aws-amplify/storage/s3";
 import { v4 as uuidv4 } from "uuid";
 import Video from "@/types/video.ts";
@@ -27,15 +27,11 @@ function UploadPage() {
   const [uploadStatus, setUploadStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
-  const navigate = useNavigate();
   const { user } = useAuthenticator((context) => [context.user]);
   if (!user.signInDetails?.loginId) {
     throw new Error("No user signIn details found.");
   }
   const userId = user.signInDetails.loginId;
-  const handleCancel = async () => {
-    await navigate("/");
-  };
 
   const uploadVideo = async () => {
     if (!file) {
@@ -152,13 +148,14 @@ function UploadPage() {
               >
                 Upload
               </Button>
-              <Button
-                type="button"
-                onClick={handleCancel}
-                className="btn cancel bg-red-500 text-white px-4 py-2 rounded"
-              >
-                Cancel
-              </Button>
+              <Link to={"/"}>
+                <Button
+                  type="button"
+                  className="btn cancel bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Cancel
+                </Button>
+              </Link>
             </Flex>
           </Flex>
           <View
