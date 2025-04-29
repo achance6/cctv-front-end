@@ -22,13 +22,16 @@ function HomePage() {
   }, []);
 
   return (
-    <View width={"100%"} className={"bg-gray-200"}>
+    <View width={"100%"} className={""}>
       <NavBar />
 
       <Heading
         level={1}
         textAlign={"center"}
         className={"text-4xl font-bold my-8"}
+        style={{ color: "white",
+          fontWeight:700
+         }}
       >
         Home Page
       </Heading>
