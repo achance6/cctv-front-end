@@ -1,11 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "@/assets/css/playbackPage.css";
 import NavBar from "@/components/navBar.tsx";
 import { Link, useSearchParams } from "react-router";
 import { getUrl } from "aws-amplify/storage";
-import "@vidstack/react/player/styles/base.css";
-import { MediaPlayer, MediaProvider } from "@vidstack/react";
-import { Button, Flex, Heading, Text, View } from "@aws-amplify/ui-react";
+import {
+  MediaPlayer,
+  MediaPlayerInstance,
+  MediaProvider,
+} from "@vidstack/react";
+import "@vidstack/react/player/styles/default/theme.css";
+import "@vidstack/react/player/styles/default/layouts/video.css";
+import {
+  defaultLayoutIcons,
+  DefaultVideoLayout,
+} from "@vidstack/react/player/layouts/default";
+import {
+  Button,
+  Flex,
+  Heading,
+  Label,
+  Menu,
+  MenuItem,
+  Text,
+  View,
+} from "@aws-amplify/ui-react";
 import Video from "@/types/video.ts";
 
 function PlaybackPage() {
@@ -32,6 +50,13 @@ function PlaybackPage() {
     string | undefined
   >(undefined);
   const [searchParams] = useSearchParams();
+
+  const player = useRef<MediaPlayerInstance>(null);
+  // Desired video player defaults
+  if (player.current) {
+    player.current.qualities.switch = "current";
+    player.current.qualities.autoSelect();
+  }
 
   useEffect(() => {
     const uuid = searchParams.get("v") ?? "";
@@ -131,6 +156,33 @@ function PlaybackPage() {
       });
   }, [searchParams]);
 
+  function handleQualitySelect(id: string) {
+    if (!player.current) {
+      return;
+    }
+    switch (id) {
+      case "highQualitySelect":
+        if (player.current.qualities[0]) {
+          player.current.qualities[0].selected = true;
+        }
+        break;
+      case "mediumQualitySelect":
+        if (player.current.qualities[1]) {
+          player.current.qualities[1].selected = true;
+        }
+        break;
+      case "lowQualitySelect":
+        if (player.current.qualities[2]) {
+          player.current.qualities[2].selected = true;
+        }
+        break;
+      case "ultraLowQualitySelect":
+        if (player.current.qualities[3]) {
+          player.current.qualities[3].selected = true;
+        }
+    }
+  }
+
   return (
     <View>
       <NavBar />
@@ -157,6 +209,9 @@ function PlaybackPage() {
             <MediaPlayer
               title="Sprite Fight"
               controls={true}
+              ref={player}
+              viewType={"video"}
+              streamType={"on-demand"}
               src={[
                 {
                   src: highResPresignedUrl,
@@ -183,8 +238,10 @@ function PlaybackPage() {
                   height: 360,
                 },
               ]}
+              playsInline={true}
             >
               <MediaProvider />
+              <DefaultVideoLayout icons={defaultLayoutIcons} />
             </MediaPlayer>
           ) : (
             <Text>Loading video...</Text>
@@ -207,14 +264,45 @@ function PlaybackPage() {
               </Button>
             </Link>
           </Flex>
-
-          <Flex gap={"10px"}>
-            {video.tags.map((tag) => (
-              <Button type={"button"} key={tag} className="tag-btn">
-                {tag}
-              </Button>
-            ))}
-          </Flex>
+          <View>
+            <Label htmlFor={"qualitySelect"} color={"black"}>
+              Quality
+            </Label>
+            <Menu id={"qualitySelect"} size={"large"}>
+              <MenuItem
+                id={"highQualitySelect"}
+                onClick={(event) => {
+                  handleQualitySelect(event.currentTarget.id);
+                }}
+              >
+                1080p
+              </MenuItem>
+              <MenuItem
+                id={"mediumQualitySelect"}
+                onClick={(event) => {
+                  handleQualitySelect(event.currentTarget.id);
+                }}
+              >
+                720p
+              </MenuItem>
+              <MenuItem
+                id={"lowQualitySelect"}
+                onClick={(event) => {
+                  handleQualitySelect(event.currentTarget.id);
+                }}
+              >
+                480p
+              </MenuItem>
+              <MenuItem
+                id={"ultraLowQualitySelect"}
+                onClick={(event) => {
+                  handleQualitySelect(event.currentTarget.id);
+                }}
+              >
+                360p
+              </MenuItem>
+            </Menu>
+          </View>
         </Flex>
         <Flex justifyContent={"start"}>
           <Text fontSize={"1rem"} lineHeight={"1.4"}>
@@ -223,6 +311,13 @@ function PlaybackPage() {
           <Text fontSize={"1rem"} lineHeight={"1.4"}>
             {video.viewCount} views
           </Text>
+        </Flex>
+        <Flex gap={"10px"}>
+          {video.tags.map((tag) => (
+            <Button type={"button"} key={tag} className="tag-btn">
+              {tag}
+            </Button>
+          ))}
         </Flex>
       </Flex>
     </View>
