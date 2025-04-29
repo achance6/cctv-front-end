@@ -78,6 +78,9 @@ function NavBar() {
         }}
         onSubmit={handleSearch}
         value={searchValue}
+        className="rounded-md shadow-sm bg-white"
+        style={{
+          backgroundColor: "white",}}
       />
       <Link to={"/upload"}>
         <Button
