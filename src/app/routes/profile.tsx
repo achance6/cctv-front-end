@@ -11,6 +11,7 @@ import { useParams } from "react-router";
 import VideoCollection from "@/components/videoCollection.tsx";
 import { useEffect, useState } from "react";
 import Video from "@/types/video.ts";
+import { apiGatewayUrl } from "@/config/const.ts";
 
 function Profile() {
   // whose profile page this is is acquired from path parameter
@@ -24,8 +25,6 @@ function Profile() {
   const { signOut } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
-    const apiGatewayUrl =
-      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com";
     const videosEndpoint = "/video/videos";
     if (!username) {
       throw new Error("User not found!");

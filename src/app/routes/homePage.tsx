@@ -3,13 +3,12 @@ import { Heading, View } from "@aws-amplify/ui-react";
 import { useEffect, useState } from "react";
 import Video from "@/types/video.ts";
 import VideoCollection from "@/components/videoCollection.tsx";
+import { apiGatewayUrl } from "@/config/const.ts";
 
 function HomePage() {
   const [videos, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
-    const apiGatewayUrl =
-      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com";
     const videosEndpoint = "/video/videos";
     fetch(apiGatewayUrl + videosEndpoint)
       .then((response) => response.json())
@@ -29,9 +28,7 @@ function HomePage() {
         level={1}
         textAlign={"center"}
         className={"text-4xl font-bold my-8"}
-        style={{ color: "white",
-          fontWeight:700
-         }}
+        style={{ color: "white", fontWeight: 700 }}
       >
         Home Page
       </Heading>

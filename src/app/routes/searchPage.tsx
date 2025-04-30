@@ -4,6 +4,7 @@ import { Flex, Heading, View } from "@aws-amplify/ui-react";
 import VideoCollection from "@/components/videoCollection.tsx";
 import { useEffect, useState } from "react";
 import Video from "@/types/video.ts";
+import { apiGatewayUrl } from "@/config/const.ts";
 
 const SearchPage = () => {
   const params = useParams();
@@ -11,8 +12,6 @@ const SearchPage = () => {
   const [videos, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
-    const apiGatewayUrl =
-      "https://t0cgas8vb5.execute-api.us-east-1.amazonaws.com";
     const videosEndpoint = "/video/videos";
     const queryParam = "?search=" + (query ?? "");
     fetch(apiGatewayUrl + videosEndpoint + queryParam)
