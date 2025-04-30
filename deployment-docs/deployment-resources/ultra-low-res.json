@@ -1,0 +1,43 @@
+{
+  "Description": "",
+  "Category": "",
+  "Name": "ultra-low-res",
+  "Settings": {
+    "VideoDescription": {
+      "Height": 360,
+      "CodecSettings": {
+        "Codec": "H_264",
+        "H264Settings": {
+          "InterlaceMode": "PROGRESSIVE",
+          "FramerateDenominator": 1,
+          "MaxBitrate": 1000000,
+          "FramerateControl": "SPECIFIED",
+          "RateControlMode": "QVBR",
+          "QvbrSettings": {
+            "QvbrQualityLevel": 6
+          },
+          "FramerateNumerator": 30,
+          "SceneChangeDetect": "TRANSITION_DETECTION",
+          "QualityTuningLevel": "SINGLE_PASS",
+          "FramerateConversionAlgorithm": "DUPLICATE_DROP"
+        }
+      }
+    },
+    "AudioDescriptions": [
+      {
+        "CodecSettings": {
+          "Codec": "AAC",
+          "AacSettings": {
+            "Bitrate": 96000,
+            "CodingMode": "CODING_MODE_2_0",
+            "SampleRate": 48000
+          }
+        }
+      }
+    ],
+    "ContainerSettings": {
+      "Container": "MP4",
+      "Mp4Settings": {}
+    }
+  }
+}
