@@ -75,6 +75,8 @@ Both use the Micronaut framework and come with a maven wrapper for building (i.e
        access the API
        e.g. http://localhost:5173 or https://cloudchaserstv.com
     2. Set `Access-Control-Allow-Methods` to allow all HTTP methods `*`.
+    3. Set `Access-Control-Allow-Headers` to `content-type`
+    4. Leave `Access-Control-Expose-Headers` empty
 
 ## Deploying the Client
 
