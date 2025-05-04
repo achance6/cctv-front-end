@@ -64,8 +64,8 @@ function NavBar() {
       paddingBottom={"1rem"}
       className={"shrink-0"}
     >
-      <Link to={"/"} className={"w-14 hover:drop-shadow-xl"}>
-        <Image alt={"logo"} src={logo} height="100px" objectFit="contain" />
+      <Link to={"/"} className={"w-32 hover:drop-shadow-xl"}>
+        <Image alt={"logo"} src={logo} height="175px" objectFit="contain" />
       </Link>
 
       <SearchField

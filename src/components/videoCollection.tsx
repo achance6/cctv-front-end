@@ -16,7 +16,7 @@ function VideoCollection({ videos }: VideoCollectionProps) {
       items={videos}
       isPaginated={true}
       itemsPerPage={6}
-      className={"container mx-auto px-4"}
+      className={"container mx-auto px-4 flex justify-center items-center"}
     >
       {(item, key) => <VideoCard {...item} key={key} />}
     </Collection>

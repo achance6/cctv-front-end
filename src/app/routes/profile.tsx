@@ -41,7 +41,7 @@ function Profile() {
   }, [username]);
 
   return (
-    <View width={"100%"} className={"bg-gray-200"}>
+    <View width={"100%"} className={""}>
       <NavBar />
       <Heading
         level={1}
@@ -49,11 +49,12 @@ function Profile() {
         fontWeight={"bold"}
         fontSize={"2.5em"}
         fontFamily={"monospace"}
+        style={{ color: "white" }}
       >
         Profile
       </Heading>
       <Flex direction={"row"} alignItems={"center"} justifyContent={"center"}>
-        <Text fontSize="2.5em" fontWeight={"bold"} fontFamily={"monospace"}>
+        <Text fontSize="2.5em" fontWeight={"bold"} fontFamily={"monospace"} style={{ color: "white" }}>
           Welcome {friendlyUsername}
         </Text>
 
