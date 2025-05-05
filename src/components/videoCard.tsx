@@ -39,8 +39,8 @@ function VideoCard(video: Video) {
       <Card
         className={"bg-white hover:bg-fuchsia-300"}
         variation={"elevated"}
-        width={"400px"}
-        height={"330px"}
+        width={"480px"}
+        height={"410px"}
         border={"1px solid gray"}
       >
         <Image
