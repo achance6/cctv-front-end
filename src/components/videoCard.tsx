@@ -61,7 +61,7 @@ function VideoCard(video: Video) {
           </Text>
           <Flex gap={".7rem"} direction={"row"}>
             <Text isTruncated={true} fontStyle={"italic"} fontWeight={"bold"}>
-              {video.uploader}
+              {video.uploader.slice(0, video.uploader.indexOf('@'))}
             </Text>
 
             {/*<Avatar  className="videoAvatar"src={props.avatar} />*/}

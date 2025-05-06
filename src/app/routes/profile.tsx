@@ -16,7 +16,6 @@ import { apiGatewayUrl } from "@/config/const.ts";
 function Profile() {
   // whose profile page this is is acquired from path parameter
   const { username } = useParams();
-  const friendlyUsername = username?.substring(0, username.lastIndexOf("@"));
   const [videos, setVideos] = useState<Video[]>([]);
 
   // user currently signed in, could be different from which user this profile page is for.
@@ -55,7 +54,7 @@ function Profile() {
       </Heading>
       <Flex direction={"row"} alignItems={"center"} justifyContent={"center"}>
         <Text fontSize="2.5em" fontWeight={"bold"} fontFamily={"monospace"} style={{ color: "white" }}>
-          Welcome {friendlyUsername}
+          Welcome {username}
         </Text>
 
         {/*Only show signin button if user is on own profile page*/}

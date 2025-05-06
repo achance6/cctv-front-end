@@ -265,7 +265,7 @@ function PlaybackPage() {
                 type={"button"}
                 className="uploadUser-btn"
               >
-                {video.uploader}
+                {video.uploader.slice(0, video.uploader.indexOf("@"))}
               </Button>
             </Link>
           </Flex>
