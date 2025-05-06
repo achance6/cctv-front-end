@@ -191,7 +191,12 @@ function PlaybackPage() {
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <Heading level={2} fontWeight={"bold"} marginBottom={"1rem"} style={{ color: "white" }}>
+        <Heading
+          level={2}
+          fontWeight={"bold"}
+          marginBottom={"1rem"}
+          style={{ color: "white" }}
+        >
           {video.title}
         </Heading>
 
